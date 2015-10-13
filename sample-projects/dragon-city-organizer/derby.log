@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sun Aug 30 20:21:52 ICT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014f-7ec5-6cc9-0000007d1ca0 
+on database directory D:\YosuaOnesimus\www\github\cococare-j\sample-projects\dragon-city-organizer\files\system\archive\derby\localhost with class loader sun.misc.Launcher$AppClassLoader@35ce36 
+Loaded from file:/D:/YosuaOnesimus/www/github/libraries/java/derby-lib/derby.jar
+java.vendor=Sun Microsystems Inc.
+java.runtime.version=1.6.0_45-b06
+user.dir=D:\YosuaOnesimus\www\github\cococare-j\sample-projects\dragon-city-organizer
+os.name=Windows 7
+os.arch=x86
+os.version=6.1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

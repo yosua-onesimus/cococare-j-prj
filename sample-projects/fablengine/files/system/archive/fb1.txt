@@ -1,0 +1,37 @@
+AstralSphere
+
+AstralSphere
+Priest, Amazer, Knight, Oracle, Hunter, Ranger
+Cleric, Qigong, Escort, Lancer, Medico, Fencer
+
+MatterSphere
+Fire, Cold, Aqua, Bolt
+Wind, Land, Holy, Dark
+Void, Iron, Time, Rune
+
+SpiritSphere
+Fiama, Glace, Acqua, Tuono
+Luvia, Boden, Lueur, Enfer
+Leere
+
+AssistSphere
+ AP to Attack: AP spent to inc Attack
+ AP to Defend: AP spent to dec damage
+ Matter Attack: attack with matter
+ Matter Defend: defend matter
+ Astral Up: level up all astral skill
+
+Sphere
+ o Priest Astral [default class]
+ Lo Cleric Astral [ext class]
+ o Fire Matter [add fire magic]
+ Lo Matter Attack
+ o Fire Matter
+ Lo Matter Defend
+
+Phoenix Fire Wing Armor 
+Cygnice Cold Wing Armor
+Griffin Wind Wing Armor
+Virtues Holy Wing Armor
+Cyclops Land Wing Armor
+Eclipse Void Wing Armor
