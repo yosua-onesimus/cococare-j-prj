@@ -4,24 +4,22 @@ package a.simple.sample;
 import static a.simple.sample.No0_Static.*;
 import cococare.common.CCHighcharts.ChartType;
 import cococare.common.CCHighcharts.Serial;
-import cococare.common.CCHighcharts.Step;
 import cococare.common.*;
+import cococare.common.CCHighcharts.Stacking;
 import cococare.common.CCHighcharts.Type;
 import cococare.common.barbecue.CCBarcode;
 import cococare.common.comm.CCComm;
 import cococare.common.ftp.CCFtp;
 import cococare.common.mail.CCMail;
 import cococare.common.mail.CCMail.MailServer;
+import cococare.common.pdf.CCPdf;
 import cococare.common.quartz.CCJob;
 import cococare.common.quartz.CCQuartz;
-import cococare.database.CCDatabaseConfig.SupportedDatabase;
 import cococare.database.*;
-import cococare.datafile.CCCsv;
-import cococare.datafile.CCDataFile;
-import cococare.datafile.CCDom;
-import cococare.datafile.CCProperties;
+import cococare.datafile.*;
 import cococare.datafile.jxl.CCExcel;
-import java.io.File;
+import com.lowagie.text.PageSize;
+import java.io.*;
 import java.sql.Time;
 import java.util.*;
 import model.obj.lib.LibAuthor;
@@ -41,13 +39,9 @@ public class NoX_SimpleAndCleanCode {
     private static class BangunDatar {
 
         private String luasPersegi = "L=s*s";
-        private String luasPersegiPanjang = "L=p*l";
         private String luasSegitiga = "L=a*t/2";
-        private String luasJajarGenjang = "L=a*t";
         private String luasTrapesium = "L=(s1+s2)*t/2";
         private double s = 4;
-        private double p = 8;
-        private double l = 6;
         private double a = 8;
         private double t = 6;
         private double s1 = 4;
@@ -342,63 +336,100 @@ public class NoX_SimpleAndCleanCode {
     }
 
     public static void sampleHighcharts_sampleBasicArea() {
-    }
-
-    public static void sampleHighcharts() {
         CCHighcharts highcharts = new CCHighcharts();
         highcharts.getChart().setRenderTo("container");
-        String[] categories = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-        highcharts.getxAxis().getCategories().addAll(Arrays.asList(categories));
+        highcharts.getChart().setType(ChartType.area);
+        highcharts.getTitle().setText("US and USSR nuclear stockpiles");
+        highcharts.getSubtitle().setText("Source: <a href=\"http://thebulletin.metapress.com/content/c4120650912x74k7/fulltext.pdf\">thebulletin.metapress.com</a>");
+        highcharts.getxAxis().getLabels().setFormatter("this.value");
+        highcharts.getyAxis().getTitle().setText("Nuclear weapon states");
+        highcharts.getyAxis().getLabels().setFormatter("this.value / 1000 + 'k'");
+        highcharts.getTooltip().setPointFormat("{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}");
         Serial serial = highcharts.newSerial();
-        Double[] data = new Double[]{29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4};
-        serial.getData().addAll(Arrays.asList(data));
+        serial.setName("USA");
+        serial.getData().addAll(Arrays.asList(
+                null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640,
+                1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468, 20434, 24126,
+                27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
+                26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
+                24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586,
+                22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
+                10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("USSR/Russia");
+        serial.getData().addAll(Arrays.asList(
+                null, null, null, null, null, null, null, null, null, null,
+                5, 25, 50, 120, 150, 200, 426, 660, 869, 1060, 1605, 2471, 3322,
+                4238, 5221, 6129, 7089, 8339, 9399, 10538, 11643, 13092, 14478,
+                15915, 17385, 19055, 21205, 23044, 25393, 27935, 30062, 32049,
+                33952, 35804, 37431, 39197, 45000, 43000, 41000, 39000, 37000,
+                35000, 33000, 31000, 29000, 27000, 25000, 24000, 23000, 22000,
+                21000, 20000, 19000, 18000, 18000, 17000, 16000));
         highcharts.getSeries().add(serial);
         println(highcharts.compile());
     }
 
-    public static void sampleHighcharts2() {
+    public static void sampleHighcharts_sampleStackedArea() {
         CCHighcharts highcharts = new CCHighcharts();
         highcharts.getChart().setRenderTo("container");
-        highcharts.getChart().setType(ChartType.funnel);
-        highcharts.getChart().setMarginRight(100);
-        highcharts.getPlotOptions().getSeries().setShowInLegend(false);
+        highcharts.getChart().setType(ChartType.area);
+        highcharts.getTitle().setText("Historic and Estimated Worldwide Population Growth by Region");
+        highcharts.getSubtitle().setText("Source: Wikipedia.org");
+        highcharts.getxAxis().getCategories().addAll(Arrays.asList("1750", "1800", "1850", "1900", "1950", "1999", "2050"));
+        highcharts.getyAxis().getTitle().setText("Billions");
+        highcharts.getyAxis().getLabels().setFormatter("this.value / 1000");
+        highcharts.getTooltip().setValueSuffix(" millions");
+        highcharts.getTooltip().setShared(true);
+        highcharts.getPlotOptions().getArea().setStacking(Stacking.normal);
         Serial serial = highcharts.newSerial();
-        serial.setName("Unique users");
-        serial.getDataLabels().setFormat("<b>{point.name}</b> ({point.y:,.0f})");
-        serial.getData().add(highcharts.newList("Website visits", 15654));
-        serial.getData().add(highcharts.newList("Downloads", 4064));
-        serial.getData().add(highcharts.newList("Requested price list", 1987));
-        serial.getData().add(highcharts.newList("Invoice sent", 976));
-        serial.getData().add(highcharts.newList("Finalized", 846));
+        serial.setName("Asia");
+        serial.getData().addAll(Arrays.asList(502, 635, 809, 947, 1402, 3634, 5268));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Africa");
+        serial.getData().addAll(Arrays.asList(106, 107, 111, 133, 221, 767, 1766));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Europe");
+        serial.getData().addAll(Arrays.asList(163, 203, 276, 408, 547, 729, 628));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("America");
+        serial.getData().addAll(Arrays.asList(18, 31, 54, 156, 339, 818, 1201));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Oceania");
+        serial.getData().addAll(Arrays.asList(2, 2, 2, 6, 13, 30, 46));
         highcharts.getSeries().add(serial);
         println(highcharts.compile());
     }
 
-    public static void sampleHighcharts3() {
+    public static void sampleHighcharts_sampleBasicBar() {
         CCHighcharts highcharts = new CCHighcharts();
         highcharts.getChart().setRenderTo("container");
-        highcharts.getChart().setType(ChartType.line);
-        String[] categories = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-        highcharts.getxAxis().getCategories().addAll(Arrays.asList(categories));
+        highcharts.getChart().setType(ChartType.bar);
+        highcharts.getTitle().setText("Historic World Population by Region");
+        highcharts.getSubtitle().setText("Source: <a href=\"https://en.wikipedia.org/wiki/World_population\">Wikipedia.org</a>");
+        highcharts.getxAxis().getCategories().addAll(Arrays.asList("Africa", "America", "Asia", "Europe", "Oceania"));
+        highcharts.getyAxis().getTitle().setText("Population (millions)");
+        highcharts.getTooltip().setValueSuffix(" millions");
         Serial serial = highcharts.newSerial();
-        serial.setName("Right");
-        serial.setStep(Step.right);
-        Double[] data = new Double[]{1d, 2d, 3d, 4d, null, 6d, 7d, null, 9d};
-        serial.getData().addAll(Arrays.asList(data));
-        Serial serial2 = highcharts.newSerial();
-        serial2.setName("Center");
-        serial2.setStep(Step.center);
-        Double[] data2 = new Double[]{5d, 6d, 7d, 8d, null, 10d, 11d, null, 13d};
-        serial2.getData().addAll(Arrays.asList(data2));
-        Serial serial3 = highcharts.newSerial();
-        serial3.setName("Left");
-        serial3.setStep(Step.left);
-        Double[] data3 = new Double[]{9d, 10d, 11d, 12d, null, 14d, 15d, null, 17d};
-        serial3.getData().addAll(Arrays.asList(data3));
+        serial.setName("Year 1800");
+        serial.getData().addAll(Arrays.asList(107, 31, 635, 203, 2));
         highcharts.getSeries().add(serial);
-        highcharts.getSeries().add(serial2);
-        highcharts.getSeries().add(serial3);
+        serial = highcharts.newSerial();
+        serial.setName("Year 1900");
+        serial.getData().addAll(Arrays.asList(133, 156, 947, 408, 6));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Year 2012");
+        serial.getData().addAll(Arrays.asList(1052, 954, 4250, 740, 38));
+        highcharts.getSeries().add(serial);
         println(highcharts.compile());
+    }
+
+    public static void sampleHighcharts_sampleStackedBar() {
     }
 //</editor-fold>
 
@@ -413,11 +444,6 @@ public class NoX_SimpleAndCleanCode {
         List lstEmpty = new ArrayList();
         println("lstNull" + _ + CCLogic.isNull(lstNull) + "," + CCLogic.isNullOrEmpty(lstNull));
         println("lstEmpty" + _ + CCLogic.isNull(lstEmpty) + "," + CCLogic.isNullOrEmpty(lstEmpty));
-        ______________________________________________________________________();
-        Map mapNull = null;
-        Map mapEmpty = new HashMap();
-        println("mapNull" + _ + CCLogic.isNull(mapNull) + "," + CCLogic.isNullOrEmpty(mapNull));
-        println("mapEmpty" + _ + CCLogic.isNull(mapEmpty) + "," + CCLogic.isNullOrEmpty(mapEmpty));
         ______________________________________________________________________();
         println(strNull + "|" + strEmpty + "|" + string2 + _ + CCLogic.coalesce(strNull, strEmpty, string2));
         ______________________________________________________________________();
@@ -435,9 +461,7 @@ public class NoX_SimpleAndCleanCode {
         println("L=s*s" + _ + "L=" + CCMath.expression("s*s", bangunDatar) + _ + "L=" + CCMath.calculate("s*s", bangunDatar));
         ______________________________________________________________________();
         println(bangunDatar.luasPersegi + _ + ((BangunDatar) CCMath.manipulate(bangunDatar, bangunDatar.luasPersegi)).L);
-        println(bangunDatar.luasPersegiPanjang + _ + ((BangunDatar) CCMath.manipulate(bangunDatar, bangunDatar.luasPersegiPanjang)).L);
         println(bangunDatar.luasSegitiga + _ + ((BangunDatar) CCMath.manipulate(bangunDatar, bangunDatar.luasSegitiga)).L);
-        println(bangunDatar.luasJajarGenjang + _ + ((BangunDatar) CCMath.manipulate(bangunDatar, bangunDatar.luasJajarGenjang)).L);
         println(bangunDatar.luasTrapesium + _ + ((BangunDatar) CCMath.manipulate(bangunDatar, bangunDatar.luasTrapesium)).L);
         ______________________________________________________________________();
         println(CCMath.expression(bangunDatar.luasTrapesium, bangunDatar) + _ + CCMath.solved(bangunDatar, bangunDatar.luasTrapesium));
@@ -491,6 +515,11 @@ public class NoX_SimpleAndCleanCode {
     }
 //</editor-fold>
 
+//<editor-fold defaultstate="collapsed" desc=" sampleJasper ">
+    public static void sampleJasper() {
+    }
+//</editor-fold>
+
 //<editor-fold defaultstate="collapsed" desc=" sampleMail ">
     public static void sampleMail() {
         CCMail mail = new CCMail();
@@ -513,6 +542,26 @@ public class NoX_SimpleAndCleanCode {
     }
 //</editor-fold>
 
+//<editor-fold defaultstate="collapsed" desc=" samplePdf ">
+    public static void samplePdf() {
+        CCPdf pdf = new CCPdf();
+        pdf.createDocument(PageSize.A4.rotate(), new File("D:\\members.pdf"));
+        pdf.openDocument();
+
+        List<LibMember> members = new ArrayList();
+        members.add(newMember("M001", "Yosua Onesimus", "06/06/1984", Gender.MALE));
+        members.add(newMember("M002", "Sari Heriati", "17/03/1984", Gender.FEMALE));
+        members.add(newMember("M003", "Delvin Acelin", "02/09/2014", Gender.MALE));
+        pdf.initEntity(LibMember.class, true);
+        pdf.newTableEntity();
+        pdf.writeTableHeaderEntity();
+        pdf.writeTableContentEntity(members);
+        pdf.addElementTable();
+
+        pdf.closeDocument();
+    }
+//</editor-fold>
+
 //<editor-fold defaultstate="collapsed" desc=" sampleQuartz ">
     public static void sampleQuartz() {
         HashMap<String, Object> parameter = new HashMap();
@@ -525,11 +574,8 @@ public class NoX_SimpleAndCleanCode {
 //<editor-fold defaultstate="collapsed" desc=" sampleDatabase ">
     public static void sampleDatabase() {
         CCDatabaseConfig databaseConfig = new CCDatabaseConfig().
-                withSupportedDatabase(SupportedDatabase.MySQL).
-                withHost("localhost").
-                withPort("3306").
-                withUsername("root").
-                withPassword("1234").
+                withHost("localhost").withPort("3306").
+                withUsername("root").withPassword("1234").
                 withDatabase("coco_trial");
 
         final CCDatabase database = new CCDatabase();
@@ -560,11 +606,8 @@ public class NoX_SimpleAndCleanCode {
 //<editor-fold defaultstate="collapsed" desc=" sampleHibernate ">
     public static void sampleHibernate() {
         CCDatabaseConfig databaseConfig = new CCDatabaseConfig().
-                withSupportedDatabase(SupportedDatabase.MySQL).
-                withHost("localhost").
-                withPort("3306").
-                withUsername("root").
-                withPassword("1234").
+                withHost("localhost").withPort("3306").
+                withUsername("root").withPassword("1234").
                 withDatabase("coco_trial");
 
         final CCHibernate hibernate = new CCHibernate();
@@ -685,11 +728,47 @@ public class NoX_SimpleAndCleanCode {
     }
 //</editor-fold>
 
+//<editor-fold defaultstate="collapsed" desc=" sampleFile ">
+    public static void sampleFile() {
+        File fileName = new File("D:\\sampleFile_file.txt");
+        File fileName2 = new File("D:\\sampleFile_file2.txt");
+        File fileName3 = new File("D:\\sampleFile_file3.txt");
+        File zipName = new File("D:\\sampleFile_zip.zip");
+        File folderName = new File("D:\\sampleFile_folder");
+
+        System.out.println("fileName[2|3].exists()" + _ + fileName2.exists() + _ + fileName3.exists());
+        CCFile.copy(fileName, fileName2);
+        System.out.println("fileName[2|3].exists()" + _ + fileName2.exists() + _ + fileName3.exists());
+        CCFile.rename(fileName2, fileName3);
+        System.out.println("fileName[2|3].exists()" + _ + fileName2.exists() + _ + fileName3.exists());
+        CCFile.delete(fileName3);
+        System.out.println("fileName[2|3].exists()" + _ + fileName2.exists() + _ + fileName3.exists());
+
+        System.out.println("zipName.exists()" + _ + zipName.exists());
+        CCFile.zip(zipName, fileName);
+        System.out.println("zipName.exists()" + _ + zipName.exists());
+
+        System.out.println("folderName.exists()" + _ + folderName.exists());
+        CCFile.unzip(zipName, folderName);
+        System.out.println("folderName.exists()" + _ + folderName.exists());
+    }
+//</editor-fold>
+
+//<editor-fold defaultstate="collapsed" desc=" sampleImage ">
+    public static void sampleImage() {
+    }
+//</editor-fold>
+
 //<editor-fold defaultstate="collapsed" desc=" sampleProperties ">
     public static void sampleProperties() {
         CCProperties properties = new CCProperties();
         properties.setValue(bangunDatar, false);
         properties.storeExtern(new File("D:\\bangunDatar.prop"));
+    }
+//</editor-fold>
+
+//<editor-fold defaultstate="collapsed" desc=" sampleFoxPro ">
+    public static void sampleFoxPro() {
     }
 //</editor-fold>
 
@@ -748,6 +827,6 @@ public class NoX_SimpleAndCleanCode {
 //</editor-fold>
 
     public static void main(String[] args) {
-        sampleHighcharts_sampleBasicArea();
+        sampleExcel2();
     }
 }
