@@ -26,7 +26,7 @@ public class DragonHabitatOptimizationBo extends CCHibernateBo {
 //<editor-fold defaultstate="collapsed" desc=" public method ">
     public synchronized void execute() {
         //1. delete unused dragon
-        dragonDao.deleteUnusedDragon();
+        //dragonDao.deleteUnusedDragon();
         //2. update habitat to null
         dragonDao.updateHabitatToNull();
         //3. delete all habitat

@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class Dragon extends CCEntity {
 
     @Column(length = 9)
-    @CCFieldConfig(accessible = Accessible.MANDATORY, maxLength = 8, sequence = "D000000", unique = true, requestFocus = true)
+    @CCFieldConfig(accessible = Accessible.MANDATORY, maxLength = 9, sequence = "D000000", requestFocus = true)
     private String code;
     @Column(length = 16)
     @CCFieldConfig(label = "Name", accessible = Accessible.MANDATORY, maxLength = 16)
@@ -43,9 +43,9 @@ public class Dragon extends CCEntity {
     private Integer level = 10;
     @CCFieldConfig(label = "Rev", tooltiptext = "Revenues", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3)
     private Integer revenues = 0;
-    @CCFieldConfig(accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3, visible = false)
+    @CCFieldConfig(label = "Rev (%)", tooltiptext = "Revenues Percent", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3, visible = false)
     private Integer revenuesPercent = 0;
-    @CCFieldConfig(accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3, visible = false)
+    @CCFieldConfig(label = "Rev Ttl", tooltiptext = "Revenues Total", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3, visible = false)
     private Integer revenuesTotal = 0;
     //
     @ManyToOne

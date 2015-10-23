@@ -26,9 +26,9 @@ public class Habitat extends CCEntity {
     @Column(name = "no_")
     @CCFieldConfig(accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer no;
-    @CCFieldConfig(accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 1)
+    @CCFieldConfig(label = "Dragons", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 1)
     private Integer totalDragon = 0;
-    @CCFieldConfig(accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3)
+    @CCFieldConfig(label = "Revenues", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3)
     private Integer totalRevenues = 0;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">
