@@ -126,6 +126,7 @@ public class PnlEllusion1 extends javax.swing.JPanel {
         btnYes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Y.png"))); // NOI18N
         btnYes.setBorderPainted(false);
         btnYes.setContentAreaFilled(false);
+        btnYes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnYes.setFocusable(false);
         btnYes.setIconTextGap(0);
 
@@ -133,6 +134,7 @@ public class PnlEllusion1 extends javax.swing.JPanel {
         btnNo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/N.png"))); // NOI18N
         btnNo.setBorderPainted(false);
         btnNo.setContentAreaFilled(false);
+        btnNo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNo.setFocusable(false);
         btnNo.setIconTextGap(0);
 
@@ -178,18 +180,15 @@ public class PnlEllusion1 extends javax.swing.JPanel {
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/BackG.png"))); // NOI18N
         btnBack.setBorderPainted(false);
         btnBack.setContentAreaFilled(false);
+        btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBack.setFocusable(false);
         btnBack.setIconTextGap(0);
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
 
         btnNext.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/NextG.png"))); // NOI18N
         btnNext.setBorderPainted(false);
         btnNext.setContentAreaFilled(false);
+        btnNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNext.setFocusable(false);
         btnNext.setIconTextGap(0);
 
@@ -216,10 +215,6 @@ public class PnlEllusion1 extends javax.swing.JPanel {
                     .addComponent(lblSpan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBackActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnNext;

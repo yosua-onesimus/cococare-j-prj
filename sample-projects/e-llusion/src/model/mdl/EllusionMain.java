@@ -3,7 +3,7 @@ package model.mdl;
 //<editor-fold defaultstate="collapsed" desc=" import ">
 import cococare.common.CCMessage;
 import cococare.database.CCLoginInfo;
-import static cococare.datafile.CCImage.readImage;
+import cococare.datafile.CCImage;
 import cococare.framework.swing.CFSwingMap;
 import cococare.framework.swing.CFSwingUae;
 import cococare.swing.CCSwing;
@@ -31,7 +31,7 @@ public class EllusionMain {
         //put main screen to center
         CCSwing.centerScreen(CFSwingMap.getMainScreen());
         //set icon
-        CFSwingMap.getMainScreen().setIconImage(readImage("/cococare/resource/icon-cococare.jpg"));
+        CFSwingMap.getMainScreen().setIconImage(CCImage.readImage("/cococare/resource/icon-cococare.jpg"));
         //show main screen
         CFSwingMap.getMainScreen().setVisible(true);
     }
