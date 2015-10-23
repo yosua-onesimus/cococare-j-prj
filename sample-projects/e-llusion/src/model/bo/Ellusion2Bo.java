@@ -14,12 +14,12 @@ public class Ellusion2Bo {
         {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}
     };
 //</editor-fold>
+    public static Date TODAY = new Date();
 
     public static Integer[][] getTodayMatrix() {
         Integer[][] aryToday = new Integer[4][4];
-        Date today = new Date();
-        int month = CCFormat.getMonth(today) + 1;
-        int day = CCFormat.getDay(today);
+        int month = CCFormat.getMonth(TODAY) + 1;
+        int day = CCFormat.getDay(TODAY);
         int mdTotal = (month * 100) + day - 34;
         int mdTotal_4 = (mdTotal / 4);
         int mdMod = mdTotal % 4;
