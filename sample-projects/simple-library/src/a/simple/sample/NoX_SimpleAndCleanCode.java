@@ -430,6 +430,91 @@ public class NoX_SimpleAndCleanCode {
     }
 
     public static void sampleHighcharts_sampleStackedBar() {
+        CCHighcharts highcharts = new CCHighcharts();
+        highcharts.getChart().setRenderTo("container");
+        highcharts.getChart().setType(ChartType.bar);
+        highcharts.getTitle().setText("Stacked bar chart");
+        highcharts.getxAxis().getCategories().addAll(Arrays.asList("Apples", "Oranges", "Pears", "Grapes", "Bananas"));
+        highcharts.getyAxis().getTitle().setText("Total fruit consumption");
+        highcharts.getLegend().setReversed(true);
+        highcharts.getPlotOptions().getSeries().setStacking(Stacking.normal);
+        Serial serial = highcharts.newSerial();
+        serial.setName("John");
+        serial.getData().addAll(Arrays.asList(5, 3, 4, 7, 2));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Jane");
+        serial.getData().addAll(Arrays.asList(2, 2, 3, 2, 1));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Joe");
+        serial.getData().addAll(Arrays.asList(3, 4, 4, 2, 5));
+        highcharts.getSeries().add(serial);
+        println(highcharts.compile());
+    }
+
+    public static void sampleHighcharts_sampleBasicColumn() {
+        CCHighcharts highcharts = new CCHighcharts();
+        highcharts.getChart().setRenderTo("container");
+        highcharts.getChart().setType(ChartType.column);
+        highcharts.getTitle().setText("Monthly Average Rainfall");
+        highcharts.getSubtitle().setText("Source: WorldClimate.com");
+        highcharts.getxAxis().getCategories().addAll(Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"));
+        highcharts.getxAxis().setCrosshair(true);
+        highcharts.getyAxis().getTitle().setText("Rainfall (mm)");
+        highcharts.getTooltip().setHeaderFormat("<span style=\"font-size:10px\">{point.key}</span><table>");
+        highcharts.getTooltip().setPointFormat(
+                "<tr><td style=\"color:{series.color};padding:0\">{series.name}: </td>"
+                + "<td style=\"padding:0\"><b>{point.y:.1f} mm</b></td></tr>");
+        highcharts.getTooltip().setFooterFormat("</table>");
+        highcharts.getTooltip().setShared(true);
+        highcharts.getTooltip().setUseHTML(true);
+        Serial serial = highcharts.newSerial();
+        serial.setName("Tokyo");
+        serial.getData().addAll(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("New York");
+        serial.getData().addAll(Arrays.asList(83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("London");
+        serial.getData().addAll(Arrays.asList(48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Berlin");
+        serial.getData().addAll(Arrays.asList(42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1));
+        highcharts.getSeries().add(serial);
+        println(highcharts.compile());
+    }
+
+    public static void sampleHighcharts_sampleStackedColumn() {
+        CCHighcharts highcharts = new CCHighcharts();
+        highcharts.getChart().setRenderTo("container");
+        highcharts.getChart().setType(ChartType.column);
+        highcharts.getTitle().setText("Stacked column chart");
+        highcharts.getxAxis().getCategories().addAll(Arrays.asList("Apples", "Oranges", "Pears", "Grapes", "Bananas"));
+        highcharts.getyAxis().getTitle().setText("Total fruit consumption");
+        highcharts.getyAxis().getStackLabels().setEnabled(true);
+        highcharts.getTooltip().setHeaderFormat("<b>{point.x}</b><br/>");
+        highcharts.getTooltip().setPointFormat("{series.name}: {point.y}<br/>Total: {point.stackTotal}");
+        highcharts.getPlotOptions().getSeries().setStacking(Stacking.normal);
+        Serial serial = highcharts.newSerial();
+        serial.setName("John");
+        serial.getData().addAll(Arrays.asList(5, 3, 4, 7, 2));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Jane");
+        serial.getData().addAll(Arrays.asList(2, 2, 3, 2, 1));
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Joe");
+        serial.getData().addAll(Arrays.asList(3, 4, 4, 2, 5));
+        highcharts.getSeries().add(serial);
+        println(highcharts.compile());
+    }
+
+    public static void sampleHighcharts_sampleStackedAndGroupedColumn() {
     }
 //</editor-fold>
 
@@ -827,6 +912,6 @@ public class NoX_SimpleAndCleanCode {
 //</editor-fold>
 
     public static void main(String[] args) {
-        sampleExcel2();
+        sampleHighcharts_sampleStackedAndGroupedColumn();
     }
 }
