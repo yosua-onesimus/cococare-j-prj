@@ -41,6 +41,11 @@ public class DragonCityOrganizerMain extends CFSwingMain {
     }
 
     @Override
+    protected boolean _initInitialData() {
+        return true;
+    }
+
+    @Override
     protected void _initInitialUaeBody(CFApplUae uae) {
     }
 
