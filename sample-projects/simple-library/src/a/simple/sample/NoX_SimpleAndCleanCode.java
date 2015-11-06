@@ -201,29 +201,25 @@ public class NoX_SimpleAndCleanCode {
         highcharts.getChart().setRenderTo("container");
         highcharts.getTitle().setText("Monthly Average Temperature");
         highcharts.getSubtitle().setText("Source: WorldClimate.com");
-        String[] categories = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-        highcharts.getxAxis().getCategories().addAll(Arrays.asList(categories));
+        highcharts.getxAxis().getCategories().addAll(Arrays.asList(
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"));
         highcharts.getyAxis().getTitle().setText("Temperature (°C)");
         highcharts.getTooltip().setValueSuffix("°C");
         Serial serial = highcharts.newSerial();
         serial.setName("Tokyo");
-        Double[] data = new Double[]{7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6};
-        serial.getData().addAll(Arrays.asList(data));
+        serial.getData().addAll(Arrays.asList(7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6));
         highcharts.getSeries().add(serial);
         serial = highcharts.newSerial();
         serial.setName("New York");
-        data = new Double[]{-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5};
-        serial.getData().addAll(Arrays.asList(data));
+        serial.getData().addAll(Arrays.asList(-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5));
         highcharts.getSeries().add(serial);
         serial = highcharts.newSerial();
         serial.setName("Berlin");
-        data = new Double[]{-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0};
-        serial.getData().addAll(Arrays.asList(data));
+        serial.getData().addAll(Arrays.asList(-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0));
         highcharts.getSeries().add(serial);
         serial = highcharts.newSerial();
         serial.setName("London");
-        data = new Double[]{3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8};
-        serial.getData().addAll(Arrays.asList(data));
+        serial.getData().addAll(Arrays.asList(3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8));
         highcharts.getSeries().add(serial);
         println(highcharts.compile());
     }
@@ -463,9 +459,7 @@ public class NoX_SimpleAndCleanCode {
         highcharts.getxAxis().setCrosshair(true);
         highcharts.getyAxis().getTitle().setText("Rainfall (mm)");
         highcharts.getTooltip().setHeaderFormat("<span style=\"font-size:10px\">{point.key}</span><table>");
-        highcharts.getTooltip().setPointFormat(
-                "<tr><td style=\"color:{series.color};padding:0\">{series.name}: </td>"
-                + "<td style=\"padding:0\"><b>{point.y:.1f} mm</b></td></tr>");
+        highcharts.getTooltip().setPointFormat("<tr><td style=\"color:{series.color};padding:0\">{series.name}: </td><td style=\"padding:0\"><b>{point.y:.1f} mm</b></td></tr>");
         highcharts.getTooltip().setFooterFormat("</table>");
         highcharts.getTooltip().setShared(true);
         highcharts.getTooltip().setUseHTML(true);
@@ -912,6 +906,6 @@ public class NoX_SimpleAndCleanCode {
 //</editor-fold>
 
     public static void main(String[] args) {
-        sampleHighcharts_sampleStackedAndGroupedColumn();
+        sampleExcel();
     }
 }
