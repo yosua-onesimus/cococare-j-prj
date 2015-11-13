@@ -1,20 +1,10 @@
 package controller.form;
 
 //<editor-fold defaultstate="collapsed" desc=" import ">
-import cococare.framework.swing.CFSwingCtrl;
+import cococare.framework.swing.controller.form.PnlDefaultCtrl;
 //</editor-fold>
 
-public class PnlExitCtrl extends CFSwingCtrl {
-
-    @Override
-    protected Class _getEntity() {
-        return null;
-    }
-
-    @Override
-    protected BaseFunction _getBaseFunction() {
-        return null;
-    }
+public class PnlExitCtrl extends PnlDefaultCtrl {
 
     @Override
     public boolean init() {

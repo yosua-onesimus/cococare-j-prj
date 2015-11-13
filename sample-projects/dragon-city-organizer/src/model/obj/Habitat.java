@@ -1,15 +1,14 @@
 package model.obj;
 
 //<editor-fold defaultstate="collapsed" desc=" import ">
+import static cococare.common.CCClass.getAssociativeArray;
 import cococare.common.CCFieldConfig;
 import cococare.common.CCFieldConfig.Accessible;
 import cococare.common.CCFieldConfig.Type;
 import cococare.common.CCTypeConfig;
 import cococare.database.CCEntity;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import model.dao.DragonDao;
 //</editor-fold>
 
 @Entity
@@ -30,8 +29,18 @@ public class Habitat extends CCEntity {
     private Integer totalDragon = 0;
     @CCFieldConfig(label = "Revenues", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3)
     private Integer totalRevenues = 0;
+    @Transient
+    @CCFieldConfig(label = "Dragons", visible2 = false)
+    private String dragons;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">
+    @Override
+    protected void preProcess() {
+        if (!isNewEntity()) {
+            dragons = getAssociativeArray(new DragonDao().getListUnlimitedBy(this), "customName");
+        }
+    }
+
     public String getCode() {
         return code;
     }
@@ -70,6 +79,10 @@ public class Habitat extends CCEntity {
 
     public void setTotalRevenues(Integer totalRevenues) {
         this.totalRevenues = totalRevenues;
+    }
+
+    public String getDragons() {
+        return dragons;
     }
 //</editor-fold>
 }

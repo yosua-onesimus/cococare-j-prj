@@ -8,6 +8,7 @@ import cococare.framework.common.CFApplUae;
 import cococare.framework.swing.CFSwingMain;
 import static cococare.framework.swing.CFSwingMap.getMainScreen;
 import cococare.framework.swing.controller.form.util.*;
+import controller.form.PnlDragonHabitatOptimizationCtrl;
 //</editor-fold>
 
 public class DragonCityOrganizerMain extends CFSwingMain {
@@ -66,6 +67,8 @@ public class DragonCityOrganizerMain extends CFSwingMain {
 
     @Override
     protected void _applyUserConfigUaeEnd(CFApplUae uae) {
+        uae.addMenuRoot(PnlDragonHabitatOptimizationCtrl.class);
+        uae.addMenuParent("Dragon Habitat Optimization", "/cococare/resource/icon-menu-parent.png", PnlDragonHabitatOptimizationCtrl.class);
         uae.changeMenuSide();
         uae.addMenuParent(Utility, "/cococare/resource/icon-menu-parent.png", null);
         if (!HIBERNATE.getParameterClasses().isEmpty()) {

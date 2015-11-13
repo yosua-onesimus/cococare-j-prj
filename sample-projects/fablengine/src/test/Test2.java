@@ -4,7 +4,6 @@ import cococare.common.CCClass;
 import cococare.database.CCHibernate;
 import cococare.datafile.CCFile;
 import cococare.framework.model.mdl.util.UtilityModule;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import model.dao.fb.FbMapTileDao;
@@ -25,7 +24,7 @@ public class Test2 {
 
     public static CCHibernate newHibernate() {
         CCHibernate hibernate = new CCHibernate();
-        hibernate.loadDatabaseConfig(new File(CCFile.getFileSystConfPath(), "dtbs.conf"));
+        hibernate.loadDatabaseConfig(CCFile.getFileSystConfFile("dtbs.conf"));
         UtilityModule.INSTANCE.init(hibernate);
         FableModule.INSTANCE.init(hibernate);
         hibernate.buildSessionFactories();

@@ -24,38 +24,38 @@ public class DragonHabitatOptimizationBo extends CCHibernateBo {
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc=" public method ">
-    public synchronized void execute() {
-        //1. delete unused dragon
-        //dragonDao.deleteUnusedDragon();
-        //2. update habitat to null
-        dragonDao.updateHabitatToNull();
-        //3. delete all habitat
-        habitatDao.deleteAll();
-        //4. optimization begin
+    public synchronized boolean execute() {
+        boolean success = true;
+        //1. update habitat to null
+        success &= dragonDao.updateHabitatToNull() > -1;
+        //2. delete all habitat
+        success &= habitatDao.deleteAll() > -1;
+        //3. optimization begin
         List<HabitatType> habitatTypes = habitatTypeDao.getListUnlimited();
         for (int index = habitatTypes.size() - 1; index >= 0; index--) {
             HabitatType habitatType = habitatTypes.get(index);
             List<Dragon> dragons = dragonDao.getListUnlimitedBy(habitatType, false);
             if (!dragons.isEmpty()) {
-                //4.1. create habitat
+                //3.1. create habitat
                 double habitatCount = Math.ceil((double) dragons.size() / (double) (habitatType.getMaxDragons() - 1));
                 for (int i = 0; i < habitatCount; i++) {
                     Habitat habitat = new Habitat();
                     habitat.setCode("H" + pack(habitatType.getId().toString(), "0", 2) + (i + 1));
                     habitat.setHabitatType(habitatType);
                     habitat.setNo(i + 1);
-                    habitatDao.saveOrUpdate(habitat);
+                    success &= habitatDao.saveOrUpdate(habitat);
                 }
-                //4.2. distribute dragon
+                //3.2. distribute dragon
                 for (Dragon dragon : dragons) {
                     dragon.setRevenuesTotal(dragonBo.countRevenuesTotal(dragon.getRevenues(), dragon.getRevenuesPercent()));
                     Habitat habitat = habitatDao.getMinTotalRevenuesBy(habitatType);
                     dragon.setHabitat(habitat);
-                    dragonDao.saveOrUpdate(dragon);
-                    habitatBo.saveOrUpdate(habitat);
+                    success &= dragonDao.saveOrUpdate(dragon);
+                    success &= habitatBo.saveOrUpdate(habitat);
                 }
             }
         }
+        return success;
     }
 //</editor-fold>
 }

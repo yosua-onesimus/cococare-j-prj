@@ -1,7 +1,7 @@
 package controller.form.lib;
 
 //<editor-fold defaultstate="collapsed" desc=" import ">
-import cococare.common.CCFieldConfig;
+import cococare.common.CCFieldConfig.Accessible;
 import cococare.framework.swing.controller.form.PnlReportDefaultListCtrl;
 import cococare.swing.component.CCBandBox;
 import javax.swing.JLabel;
@@ -36,8 +36,8 @@ public class PnlReportListCtrl extends PnlReportDefaultListCtrl {
     @Override
     protected void _doUpdateAccessible() {
         int selectedIndex = cmbReport.getSelectedIndex();
-        edtEntity.setAccessible(bndBook, selectedIndex == Report.BOOK_HISTORY.ordinal() ? CCFieldConfig.Accessible.MANDATORY : CCFieldConfig.Accessible.NORMAL);
-        edtEntity.setAccessible(bndMember, selectedIndex == Report.MEMBER_HISTORY.ordinal() ? CCFieldConfig.Accessible.MANDATORY : CCFieldConfig.Accessible.NORMAL);
+        edtEntity.setAccessible(bndBook, selectedIndex == Report.BOOK_HISTORY.ordinal() ? Accessible.MANDATORY : Accessible.NORMAL);
+        edtEntity.setAccessible(bndMember, selectedIndex == Report.MEMBER_HISTORY.ordinal() ? Accessible.MANDATORY : Accessible.NORMAL);
         xBook.setVisible(selectedIndex == Report.BOOK_HISTORY.ordinal());
         bndBook.setVisible(selectedIndex == Report.BOOK_HISTORY.ordinal());
         xMember.setVisible(selectedIndex == Report.MEMBER_HISTORY.ordinal());

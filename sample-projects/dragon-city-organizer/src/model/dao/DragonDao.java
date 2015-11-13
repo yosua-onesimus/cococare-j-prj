@@ -20,14 +20,6 @@ public class DragonDao extends DragonCityOrganizerDao {
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc=" public method ">
-    public int deleteUnusedDragon() {
-        hql.start().
-                delete().
-                where("code IN ('D0105','D0501')");
-        parameters.start();
-        return executeUpdate(hql.value(), parameters.value());
-    }
-
     public int updateHabitatToNull() {
         hql.start().
                 update().
@@ -40,7 +32,7 @@ public class DragonDao extends DragonCityOrganizerDao {
         return countByField("habitat", habitat, false);
     }
 
-    public List<Dragon> getListUnlimitedBy(HabitatType habitatType, Boolean hasHabitat) {
+    public List<Dragon> getListUnlimitedBy(HabitatType habitatType, boolean hasHabitat) {
         hql.start().
                 where(":habitatType IN (habitatType1, habitatType2, habitatType3, habitatType4)");
         parameters.start().
@@ -48,7 +40,8 @@ public class DragonDao extends DragonCityOrganizerDao {
         if (isNotNull(hasHabitat)) {
             hql.where(hasHabitat ? "habitat IS NOT NULL" : "habitat IS NULL");
             if (!hasHabitat) {
-                hql.orderBy("revenues DESC");
+                hql.orderBy("revenues DESC").
+                        orderBy("code DESC");
             }
         }
         return getListUnlimitedBy(hql.value(), parameters.value());
@@ -61,6 +54,10 @@ public class DragonDao extends DragonCityOrganizerDao {
         parameters.start().
                 set("habitat", habitat);
         return parseInt(getBy(hql.value(), parameters.value()));
+    }
+
+    public List<Dragon> getListUnlimitedBy(Habitat habitat) {
+        return getListByField("habitat", habitat, false);
     }
 //</editor-fold>
 }
