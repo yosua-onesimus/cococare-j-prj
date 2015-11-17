@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * @version 13.03.17
  */
 @Entity
-@Table(name = "document_document_tags")
+@Table(name = "dmp_document_document_tags")
 @CCTypeConfig(label = "Tag", uniqueKey = "tag.name")
 public class DmpDocumentTag extends CCEntity {
 

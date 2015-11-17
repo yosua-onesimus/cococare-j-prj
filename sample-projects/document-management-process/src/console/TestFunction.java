@@ -35,9 +35,9 @@ public class TestFunction {
 
 //<editor-fold defaultstate="collapsed" desc=" _exim() ">
     private static void _exim() {
-        File excelFile = new File("D:\\workflow.xls");
+        File excelFile = CCFile.getFileSystArchFile("document-management-process-example.xls");
         CCExcel excel = new CCExcel();
-        if (true) {
+        if (false) {
             //export
             excel.newWorkbook();
             for (Class eximClass : eximClasses) {
@@ -48,8 +48,8 @@ public class TestFunction {
             }
             excel.saveAndCloseWorkbook(excelFile);
         }
-        if (false) {
-            //import
+        if (true) {
+            //import  -->  init initial data example
             excel.openWorkbook(excelFile);
             for (Class eximClass : eximClasses) {
                 excel.getSheet(eximClass.getSimpleName());
