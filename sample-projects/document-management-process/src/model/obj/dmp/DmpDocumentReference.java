@@ -32,14 +32,14 @@ public class DmpDocumentReference extends CCEntity {
     @CCFieldConfig(componentId = "cmbType", accessible = Accessible.MANDATORY, optionSource = "model.obj.dmp.DmpEnum$ReferenceType", optionReflectKey = "type", visible = false)
     private Integer typeIndex = ReferenceType.ATTACHMENT.ordinal();
     @Column(length = 16)
-    @CCFieldConfig(maxLength = 16, visible = false, visible2 = false)
+    @CCFieldConfig(maxLength = 16, visible2 = false)
     private String type = ReferenceType.ATTACHMENT.toString();
     @Lob
     @Column(length = Integer.MAX_VALUE)
-    @CCFieldConfig(componentId = "attByteA", type = Type.COMMON_FILE, optionReflectKey = "value", visible = false)
+    @CCFieldConfig(label = "Value", componentId = "attByteA", accessible = Accessible.MANDATORY, type = Type.COMMON_FILE, optionReflectKey = "value", visible = false)
     transient private byte[] byteA;
     @Column(name = "value_", length = 255)
-    @CCFieldConfig(componentId = "txtValue", visible = false, visible2 = false)
+    @CCFieldConfig(componentId = "txtValue", accessible = Accessible.MANDATORY, visible = false)
     private String value;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">

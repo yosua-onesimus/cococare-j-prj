@@ -7,6 +7,7 @@ import cococare.framework.common.CFApplUae;
 import cococare.framework.swing.CFSwingMain;
 import cococare.framework.swing.controller.form.wf.PnlApplicationListCtrl;
 import cococare.framework.swing.controller.form.wf.PnlPortfolioListCtrl;
+import controller.form.dmp.PnlDocumentListCtrl;
 import model.obj.dmp.DmpDocument;
 //</editor-fold>
 
@@ -48,9 +49,15 @@ public class DmpMain extends CFSwingMain {
 
     @Override
     protected void _applyUserConfigUaeBody(CFApplUae uae) {
-        uae.addMenuRoot(PnlPortfolioListCtrl.class, PnlApplicationListCtrl.class);
-        uae.addMenuParent("Portfolio", "/cococare/resource/icon-menu-child.png", PnlPortfolioListCtrl.class);
-        uae.addMenuParent("Application", "/cococare/resource/icon-menu-child.png", PnlApplicationListCtrl.class);
+        uae.addMenuRoot(
+                PnlDocumentListCtrl.class,
+                PnlPortfolioListCtrl.class,
+                PnlApplicationListCtrl.class);
+        uae.addMenuParent("Normal Way", "/cococare/resource/icon-menu-parent.png", null);
+        uae.addMenuChild("Document", "/cococare/resource/icon-menu-child.png", PnlDocumentListCtrl.class);
+        uae.addMenuParent("Workflow Way", "/cococare/resource/icon-menu-parent.png", null);
+        uae.addMenuChild("Portfolio", "/cococare/resource/icon-menu-child.png", PnlPortfolioListCtrl.class);
+        uae.addMenuChild("Application", "/cococare/resource/icon-menu-child.png", PnlApplicationListCtrl.class);
     }
 
     public static void main(String[] args) {
