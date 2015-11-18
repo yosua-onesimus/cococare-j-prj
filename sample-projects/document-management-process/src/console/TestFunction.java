@@ -6,7 +6,6 @@ import cococare.database.CCHibernate;
 import cococare.datafile.CCFile;
 import cococare.datafile.jxl.CCExcel;
 import cococare.framework.common.CFApplCtrl;
-import cococare.framework.model.mdl.note.NotesModule;
 import cococare.framework.model.mdl.util.UtilityModule;
 import cococare.framework.model.mdl.wf.WorkflowModule;
 import cococare.framework.model.obj.util.UtilUser;
@@ -27,7 +26,6 @@ public class TestFunction {
         hibernate = new CCHibernate();
         hibernate.loadDatabaseConfig(CCFile.getFileSystConfFile("dtbs.conf"));
         UtilityModule.INSTANCE.init(hibernate);
-        NotesModule.INSTANCE.init(hibernate);
         WorkflowModule.INSTANCE.init(hibernate);
         hibernate.buildSessionFactories();
     }

@@ -12,4 +12,6 @@ import cococare.common.CCLanguage;
 public class StockLanguage extends CCLanguage {
 
     public static String Stk;
+    //
+    public static String Item_Stock;
 }

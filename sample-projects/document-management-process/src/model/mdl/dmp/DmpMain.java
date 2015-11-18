@@ -1,8 +1,7 @@
 package model.mdl.dmp;
 
 //<editor-fold defaultstate="collapsed" desc=" import ">
-import static cococare.common.CCConfig.APPL_UTIL_SHOW_WORKFLOW_MODULE;
-import static cococare.common.CCConfig.WF_DOCUMENT_CLASS;
+import static cococare.common.CCConfig.*;
 import cococare.framework.common.CFApplUae;
 import cococare.framework.swing.CFSwingMain;
 import cococare.framework.swing.controller.form.wf.PnlApplicationListCtrl;
@@ -22,6 +21,7 @@ public class DmpMain extends CFSwingMain {
     protected void _loadInternalSetting() {
         APPL_CODE = "document-management-process";
         APPL_NAME = "Document Management Process";
+        APPL_UTIL_INCLUDED_PERSON_ENTITIES = true;
         APPL_UTIL_SHOW_WORKFLOW_MODULE = true;
         WF_DOCUMENT_CLASS = DmpDocument.class;
         super._loadInternalSetting();
