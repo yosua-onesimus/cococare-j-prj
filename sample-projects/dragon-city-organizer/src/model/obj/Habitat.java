@@ -30,14 +30,14 @@ public class Habitat extends CCEntity {
     @CCFieldConfig(label = "Revenues", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3)
     private Integer totalRevenues = 0;
     @Transient
-    @CCFieldConfig(label = "Dragons", visible2 = false)
+    @CCFieldConfig(label = "Dragons", maxLength = Short.MAX_VALUE, visible2 = false)
     private String dragons;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">
     @Override
     protected void preProcess() {
         if (!isNewEntity()) {
-            dragons = getAssociativeArray(new DragonDao().getListUnlimitedBy(this), "customName");
+            dragons = getAssociativeArray(new DragonDao().getListUnlimitedBy(this), "@customName(@level)");
         }
     }
 

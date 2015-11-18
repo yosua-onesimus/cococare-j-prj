@@ -41,7 +41,8 @@ public class DragonDao extends DragonCityOrganizerDao {
             hql.where(hasHabitat ? "habitat IS NOT NULL" : "habitat IS NULL");
             if (!hasHabitat) {
                 hql.orderBy("revenues DESC").
-                        orderBy("code DESC");
+                        orderBy("code DESC").
+                        orderBy("customName DESC");
             }
         }
         return getListUnlimitedBy(hql.value(), parameters.value());

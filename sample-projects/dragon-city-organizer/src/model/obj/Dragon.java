@@ -21,7 +21,7 @@ public class Dragon extends CCEntity {
     @CCFieldConfig(accessible = Accessible.MANDATORY, maxLength = 9, sequence = "D000000", requestFocus = true)
     private String code;
     @Column(length = 16)
-    @CCFieldConfig(label = "Name", accessible = Accessible.MANDATORY, maxLength = 16)
+    @CCFieldConfig(label = "Name", accessible = Accessible.MANDATORY, maxLength = 16, unique = true)
     private String customName;
     @Column()
     @CCFieldConfig(accessible = Accessible.MANDATORY, visible = false)
