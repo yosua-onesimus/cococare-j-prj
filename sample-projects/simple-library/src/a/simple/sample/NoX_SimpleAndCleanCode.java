@@ -4,9 +4,9 @@ package a.simple.sample;
 import static a.simple.sample.No0_Static.*;
 import cococare.common.CCHighcharts.ChartType;
 import cococare.common.CCHighcharts.Serial;
-import cococare.common.*;
 import cococare.common.CCHighcharts.Stacking;
 import cococare.common.CCHighcharts.Type;
+import cococare.common.*;
 import cococare.common.barbecue.CCBarcode;
 import cococare.common.comm.CCComm;
 import cococare.common.ftp.CCFtp;
@@ -19,7 +19,7 @@ import cococare.database.*;
 import cococare.datafile.*;
 import cococare.datafile.jxl.CCExcel;
 import com.lowagie.text.PageSize;
-import java.io.*;
+import java.io.File;
 import java.sql.Time;
 import java.util.*;
 import model.obj.lib.LibAuthor;
@@ -906,6 +906,6 @@ public class NoX_SimpleAndCleanCode {
 //</editor-fold>
 
     public static void main(String[] args) {
-        sampleExcel();
+        sampleDatabase();
     }
 }

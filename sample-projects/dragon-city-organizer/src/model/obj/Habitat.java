@@ -3,11 +3,16 @@ package model.obj;
 //<editor-fold defaultstate="collapsed" desc=" import ">
 import static cococare.common.CCClass.getAssociativeArray;
 import cococare.common.CCFieldConfig;
+import cococare.common.CCFieldConfig.AccessValue;
 import cococare.common.CCFieldConfig.Accessible;
 import cococare.common.CCFieldConfig.Type;
+import static cococare.common.CCLogic.isNull;
 import cococare.common.CCTypeConfig;
 import cococare.database.CCEntity;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import model.dao.DragonDao;
 //</editor-fold>
 
@@ -29,18 +34,10 @@ public class Habitat extends CCEntity {
     private Integer totalDragon = 0;
     @CCFieldConfig(label = "Revenues", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3)
     private Integer totalRevenues = 0;
-    @Transient
-    @CCFieldConfig(label = "Dragons", maxLength = Short.MAX_VALUE, visible2 = false)
-    private String dragons;
+    @CCFieldConfig(accessValue = AccessValue.METHOD, label = "Dragons", maxLength = Short.MAX_VALUE, visible2 = false)
+    transient private String dragons;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">
-    @Override
-    protected void preProcess() {
-        if (!isNewEntity()) {
-            dragons = getAssociativeArray(new DragonDao().getListUnlimitedBy(this), "@customName(@level)");
-        }
-    }
-
     public String getCode() {
         return code;
     }
@@ -82,6 +79,9 @@ public class Habitat extends CCEntity {
     }
 
     public String getDragons() {
+        if (isNull(dragons) && !isNewEntity()) {
+            dragons = getAssociativeArray(new DragonDao().getListUnlimitedBy(this), "@customName(@level)");
+        }
         return dragons;
     }
 //</editor-fold>
