@@ -3,6 +3,7 @@ package controller.form.dmp;
 //<editor-fold defaultstate="collapsed" desc=" import ">
 import cococare.common.CCCustomField;
 import static cococare.common.CCLogic.isNotNull;
+import static cococare.common.CCLogic.nvl2;
 import static cococare.database.CCHibernate.readTransientByteAValue;
 import static cococare.datafile.CCFile.*;
 import cococare.framework.swing.controller.form.PnlDefaultListCtrl;
@@ -24,7 +25,7 @@ public class PnlDocumentReferenceListCtrl extends PnlDefaultListCtrl {
 
     @Override
     protected Class _getClass() {
-        return isNotNull(swingView) ? getClass() : super._getClass();
+        return nvl2(swingView, getClass(), super._getClass());
     }
 
     @Override

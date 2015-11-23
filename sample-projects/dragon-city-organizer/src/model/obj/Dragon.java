@@ -27,6 +27,9 @@ public class Dragon extends CCEntity {
     @CCFieldConfig(accessible = Accessible.MANDATORY, visible = false)
     private String systemName;
     @ManyToOne
+    @CCFieldConfig(accessible = Accessible.MANDATORY, maxLength = 16, uniqueKey = "name")
+    private Rarity rarity;
+    @ManyToOne
     @CCFieldConfig(label = "Element1", accessible = Accessible.MANDATORY, maxLength = 16, uniqueKey = "name")
     private HabitatType habitatType1;
     @ManyToOne
@@ -39,7 +42,7 @@ public class Dragon extends CCEntity {
     @CCFieldConfig(label = "Element4", maxLength = 16, uniqueKey = "name")
     private HabitatType habitatType4;
     @Column(name = "level_")
-    @CCFieldConfig(accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3)
+    @CCFieldConfig(label = "Lvl", tooltiptext = "Level", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3)
     private Integer level = 10;
     @CCFieldConfig(label = "Rev", tooltiptext = "Revenues", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3)
     private Integer revenues = 0;
@@ -75,6 +78,14 @@ public class Dragon extends CCEntity {
 
     public void setSystemName(String systemName) {
         this.systemName = systemName;
+    }
+
+    public Rarity getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(Rarity rarity) {
+        this.rarity = rarity;
     }
 
     public HabitatType getHabitatType1() {

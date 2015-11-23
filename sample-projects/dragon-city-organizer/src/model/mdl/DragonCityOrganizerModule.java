@@ -6,6 +6,7 @@ import cococare.database.CCHibernateModule;
 import model.obj.Dragon;
 import model.obj.Habitat;
 import model.obj.HabitatType;
+import model.obj.Rarity;
 //</editor-fold>
 
 public class DragonCityOrganizerModule extends CCHibernateModule {
@@ -18,6 +19,7 @@ public class DragonCityOrganizerModule extends CCHibernateModule {
         super.init(hibernate);
         hibernate.addAnnotatedClass(HabitatType.class);
         hibernate.addAnnotatedClass(Habitat.class);
+        hibernate.addAnnotatedClass(Rarity.class);
         hibernate.addAnnotatedClass(Dragon.class);
     }
 //</editor-fold>

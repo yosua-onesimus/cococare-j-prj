@@ -30,9 +30,9 @@ public class Habitat extends CCEntity {
     @Column(name = "no_")
     @CCFieldConfig(accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer no;
-    @CCFieldConfig(label = "Dragons", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 1)
+    @CCFieldConfig(label = "TD", tooltiptext = "Total Dragon", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 1)
     private Integer totalDragon = 0;
-    @CCFieldConfig(label = "Revenues", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3)
+    @CCFieldConfig(label = "TR", tooltiptext = "Total Revenues", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3)
     private Integer totalRevenues = 0;
     @CCFieldConfig(accessValue = AccessValue.METHOD, label = "Dragons", maxLength = Short.MAX_VALUE, visible2 = false)
     transient private String dragons;

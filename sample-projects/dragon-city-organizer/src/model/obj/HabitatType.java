@@ -22,7 +22,7 @@ public class HabitatType extends CCEntity {
     @Column(length = 16)
     @CCFieldConfig(accessible = Accessible.MANDATORY, maxLength = 16)
     private String name;
-    @CCFieldConfig(accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 1)
+    @CCFieldConfig(label = "MD", tooltiptext = "Max Dragons", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 1)
     private Integer maxDragons = 4;
     @CCFieldConfig(accessible = Accessible.MANDATORY, type = Type.NUMBER_FORMAT, maxLength = 10)
     private Double maxGold = 0d;
