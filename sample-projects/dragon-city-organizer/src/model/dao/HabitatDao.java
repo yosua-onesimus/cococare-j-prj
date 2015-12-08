@@ -16,6 +16,10 @@ public class HabitatDao extends DragonCityOrganizerDao {
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc=" public method ">
+    public long countBy(HabitatType habitatType) {
+        return countByField("habitatType", habitatType, false);
+    }
+
     public Habitat getMinTotalRevenuesBy(HabitatType habitatType) {
         hql.start().
                 where("totalDragon < :totalDragon").

@@ -1,6 +1,7 @@
 package model.bo;
 
 //<editor-fold defaultstate="collapsed" desc=" import ">
+import static cococare.common.CCFormat.getString;
 import static cococare.common.CCFormat.pack;
 import cococare.database.CCHibernateBo;
 import java.util.List;
@@ -40,7 +41,7 @@ public class DragonHabitatOptimizationBo extends CCHibernateBo {
                 double habitatCount = Math.ceil((double) dragons.size() / (double) (habitatType.getMaxDragons() - 1));
                 for (int i = 0; i < habitatCount; i++) {
                     Habitat habitat = new Habitat();
-                    habitat.setCode("H" + pack(habitatType.getId().toString(), "0", 2) + (i + 1));
+                    habitat.setCode("H" + pack(habitatType.getId().toString(), "0", 2) + pack(getString(i + 1), "0", 2));
                     habitat.setHabitatType(habitatType);
                     habitat.setNo(i + 1);
                     success &= habitatDao.saveOrUpdate(habitat);

@@ -2,13 +2,16 @@ package model.obj;
 
 //<editor-fold defaultstate="collapsed" desc=" import ">
 import cococare.common.CCFieldConfig;
+import cococare.common.CCFieldConfig.AccessValue;
 import cococare.common.CCFieldConfig.Accessible;
 import cococare.common.CCFieldConfig.Type;
+import static cococare.common.CCLogic.isNull;
 import cococare.common.CCTypeConfig;
 import cococare.database.CCEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import model.dao.HabitatDao;
 //</editor-fold>
 
 @Entity
@@ -26,6 +29,8 @@ public class HabitatType extends CCEntity {
     private Integer maxDragons = 4;
     @CCFieldConfig(accessible = Accessible.MANDATORY, type = Type.NUMBER_FORMAT, maxLength = 10)
     private Double maxGold = 0d;
+    @CCFieldConfig(accessValue = AccessValue.METHOD, label = "TH", tooltiptext = "Total Habitat", type = Type.NUMERIC, maxLength = 2, visible2 = false)
+    transient private Long totalHabitat;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">
     public String getCode() {
@@ -58,6 +63,13 @@ public class HabitatType extends CCEntity {
 
     public void setMaxGold(Double maxGold) {
         this.maxGold = maxGold;
+    }
+
+    public Long getTotalHabitat() {
+        if (isNull(totalHabitat) && !isNewEntity()) {
+            totalHabitat = new HabitatDao().countBy(this);
+        }
+        return totalHabitat;
     }
 //</editor-fold>
 }

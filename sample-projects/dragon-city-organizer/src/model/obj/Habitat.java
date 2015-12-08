@@ -21,7 +21,7 @@ import model.dao.DragonDao;
 @CCTypeConfig(label = "Habitat", uniqueKey = "@habitatType.name #@no", parameter = true, controllerClass = "controller.pseudo.HabitatCtrl")
 public class Habitat extends CCEntity {
 
-    @Column(length = 4)
+    @Column(length = 5)
     @CCFieldConfig(accessible = Accessible.MANDATORY, maxLength = 4, sequence = "H000", unique = true, requestFocus = true)
     private String code;
     @ManyToOne
