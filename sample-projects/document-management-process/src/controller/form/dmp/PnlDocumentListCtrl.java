@@ -1,7 +1,6 @@
 package controller.form.dmp;
 
 //<editor-fold defaultstate="collapsed" desc=" import ">
-import static cococare.common.CCLogic.nvl2;
 import static cococare.framework.model.obj.wf.WfFilter.isDocumentStatusIsPortfolio;
 import cococare.framework.swing.controller.form.PnlDefaultListCtrl;
 import model.obj.dmp.DmpDocument;
@@ -16,7 +15,7 @@ public class PnlDocumentListCtrl extends PnlDefaultListCtrl {
 
     @Override
     protected Class _getClass() {
-        return nvl2(swingView, getClass(), super._getClass());
+        return _getClassBySwingView();
     }
 
     @Override

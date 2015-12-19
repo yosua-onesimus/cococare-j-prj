@@ -23,9 +23,9 @@ public class DmpScript {
     @CCTypeConfig(label = "SubmitToReviewerParallel")
     public static class SubmitToReviewerParallel {
 
-        @CCFieldConfig
+        @CCFieldConfig(group = "Parallel Flow")
         private Boolean toReviewer1 = false;
-        @CCFieldConfig
+        @CCFieldConfig(group = "Parallel Flow")
         private Boolean toReviewer2 = false;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">

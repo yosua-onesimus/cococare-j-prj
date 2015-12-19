@@ -1,6 +1,7 @@
 package console;
 
 //<editor-fold defaultstate="collapsed" desc=" import ">
+import cococare.common.CCConfig;
 import cococare.database.CCEntityBo;
 import cococare.database.CCHibernate;
 import cococare.datafile.CCFile;
@@ -12,6 +13,8 @@ import cococare.framework.model.obj.util.UtilUser;
 import cococare.framework.model.obj.util.UtilUserGroup;
 import cococare.framework.model.obj.wf.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 //</editor-fold>
 
 public class TestFunction {
@@ -22,7 +25,8 @@ public class TestFunction {
 
 //<editor-fold defaultstate="collapsed" desc=" _initHibernate() ">
     private static void _initHibernate() {
-        CFApplCtrl.APPL_CODE = "cccr-nts";
+        CCConfig.APPL_UTIL_SHOW_WORKFLOW_MODULE = true;
+        CFApplCtrl.APPL_CODE = "document-management-process";
         hibernate = new CCHibernate();
         hibernate.loadDatabaseConfig(CCFile.getFileSystConfFile("dtbs.conf"));
         UtilityModule.INSTANCE.init(hibernate);
@@ -61,6 +65,29 @@ public class TestFunction {
 
     public static void main(String[] args) {
         _initHibernate();
-        _exim();
+        //_exim();
+        UtilUserGroup userGroup1 = hibernate.get(UtilUserGroup.class, 1L);
+        UtilUserGroup userGroup2 = hibernate.get(UtilUserGroup.class, 2L);
+        UtilUser user1 = hibernate.get(UtilUser.class, 1L);
+        UtilUser user1b = hibernate.get(UtilUser.class, 1L);
+        UtilUser user1c = new UtilUser();
+        user1c.setId(1L);
+        UtilUser user2 = hibernate.get(UtilUser.class, 2L);
+
+//        System.out.println(userGroup1.equals(userGroup2));
+//        System.out.println(userGroup1.equals(user1));
+//        System.out.println(userGroup2.equals(user2));
+//        System.out.println(user1.equals(user2));
+//        System.out.println(user1.equals(user1b));
+//        System.out.println(user1.equals(user1c));
+
+        Set<UtilUser> users = new HashSet<UtilUser>();
+        users.add(user1);
+        users.add(user1b);
+        users.add(user1c);
+        users.add(user2);
+        for (UtilUser u : users) {
+            System.out.println(u.getUsername());
+        }
     }
 }
