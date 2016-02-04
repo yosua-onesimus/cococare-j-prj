@@ -377,7 +377,7 @@ public class NoX_SimpleAndCleanCode {
         highcharts.getyAxis().getLabels().setFormatter("this.value / 1000");
         highcharts.getTooltip().setValueSuffix(" millions");
         highcharts.getTooltip().setShared(true);
-        highcharts.getPlotOptions().getArea().setStacking(Stacking.normal);
+        highcharts.getPlotOptions().getSeries().setStacking(Stacking.normal);
         Serial serial = highcharts.newSerial();
         serial.setName("Asia");
         serial.getData().addAll(Arrays.asList(502, 635, 809, 947, 1402, 3634, 5268));
@@ -906,6 +906,6 @@ public class NoX_SimpleAndCleanCode {
 //</editor-fold>
 
     public static void main(String[] args) {
-        sampleDatabase();
+        sampleHighcharts_sampleStackedArea();
     }
 }
