@@ -17,24 +17,23 @@ import javax.persistence.Table;
 public class FbAttribute extends CCEntity {
 
     @Column(length = 4)
-    @CCFieldConfig(accessible = Accessible.MANDATORY, requestFocus = true, sequence = "E000", unique = true)
+    @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY, requestFocus = true, unique = true)
     private String code;
-    //
     @Column(length = 16)
     @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY, unique = true)
     private String name;
     //
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
     private Integer a = -50;
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
     private Integer b = 0;
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
     private Integer c = 50;
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
     private Integer d = 100;
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
     private Integer e = 200;
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
     private Integer f = 400;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">

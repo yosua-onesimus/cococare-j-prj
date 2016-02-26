@@ -610,7 +610,9 @@ public class NoX_SimpleAndCleanCode {
 //        MailServer.gmailCom.setPassword("your.pass");
         if (mail.connect4Send(MailServer.gmailCom)) {
             mail.sendMessage(
-                    new String[]{"arrow_405@yahoo.com"}, //to
+                    new String[]{
+                "arrow_405@yahoo.com",
+                "yosuaonesimus@gmail.com"}, //to
                     null, //cc
                     null, //bcc
                     "This is a subject from a sample mail",
@@ -906,6 +908,6 @@ public class NoX_SimpleAndCleanCode {
 //</editor-fold>
 
     public static void main(String[] args) {
-        sampleHighcharts_sampleStackedArea();
+        sampleMail();
     }
 }

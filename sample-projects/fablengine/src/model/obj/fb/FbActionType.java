@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class FbActionType extends CCEntity {
 
     @Column(length = 4)
-    @CCFieldConfig(accessible = Accessible.MANDATORY, requestFocus = true, sequence = "AT00", unique = true)
+    @CCFieldConfig(accessible = Accessible.MANDATORY, requestFocus = true, unique = true)
     private String code;
     @Column(length = 16)
     @CCFieldConfig(accessible = Accessible.MANDATORY, unique = true)

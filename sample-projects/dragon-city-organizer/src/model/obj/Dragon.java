@@ -18,13 +18,13 @@ import javax.persistence.Table;
 public class Dragon extends CCEntity {
 
     @Column(length = 9)
-    @CCFieldConfig(accessible = Accessible.MANDATORY, maxLength = 9, sequence = "D000000", requestFocus = true)
+    @CCFieldConfig(accessible = Accessible.MANDATORY_READONLY, maxLength = 9, sequence = "D000000")
     private String code;
     @Column(length = 16)
     @CCFieldConfig(label = "Name", accessible = Accessible.MANDATORY, maxLength = 16, unique = true)
     private String customName;
     @Column()
-    @CCFieldConfig(accessible = Accessible.MANDATORY, visible = false)
+    @CCFieldConfig(accessible = Accessible.MANDATORY, visible = false, unique = true, requestFocus = true)
     private String systemName;
     @ManyToOne
     @CCFieldConfig(accessible = Accessible.MANDATORY, maxLength = 16, uniqueKey = "name")

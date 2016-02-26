@@ -17,19 +17,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "fb_actions")
-@CCTypeConfig(label = "Action", uniqueKey = "name", parameter = true, controllerClass = "controller.pseudo.fb.FbActionCtrl")
+@CCTypeConfig(label = "Action", uniqueKey = "name", parameter = true)
 public class FbAction extends CCEntity {
 
     @Column(length = 6)
-    @CCFieldConfig(accessible = Accessible.MANDATORY, requestFocus = true, sequence = "A000", unique = true)
+    @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY, requestFocus = true, unique = true)
     private String code;
-    //
     @ManyToOne
     @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY, maxLength = 16, uniqueKey = "name")
     private FbActionType actionType;
-    @Column(length = 255)
-    @CCFieldConfig(group = "General", accessible = Accessible.READONLY)
-    private String attributes;
     @Column(length = 16)
     @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY)
     private String name;
@@ -38,26 +34,22 @@ public class FbAction extends CCEntity {
     private String description;
     @CCFieldConfig(group = "General", label = "AP Cost", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer apCost = 1;
+    @CCFieldConfig(group = "General", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
+    private Integer hitRate = 90;
+    @CCFieldConfig(group = "General", label = "Var%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
+    private Integer variance = 10;
+    @CCFieldConfig(group = "General", label = "Crt%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
+    private Integer crtRate = 10;
     //
-    @CCFieldConfig(group = "Attribute", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6, visible = false)
-    private Float hitRate = 90f;
-    @CCFieldConfig(group = "Attribute", label = "Var%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6, visible = false)
-    private Float variance = 10f;
-    @CCFieldConfig(group = "Attribute", label = "Crt%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6, visible = false)
-    private Float crtRate = 10f;
-    //
     @Column(length = 255)
-    @CCFieldConfig(group = "Formula", label = "Pre", maxLength = Short.MAX_VALUE, visible = false)
-    private String formulaPre;
+    @CCFieldConfig(group = "Effect", label = "Precondition", maxLength = Short.MAX_VALUE, visible = false)
+    private String effectPrecondition;
     @Column(length = 255)
-    @CCFieldConfig(group = "Formula", label = "Power", maxLength = Short.MAX_VALUE, visible = false)
-    private String formulaPower;
+    @CCFieldConfig(group = "Effect", label = "Power", maxLength = Short.MAX_VALUE, visible = false)
+    private String effectPower;
     @Column(length = 255)
-    @CCFieldConfig(group = "Formula", label = "Main", maxLength = Short.MAX_VALUE, visible = false)
-    private String formulaMain;
-    @Column(length = 255)
-    @CCFieldConfig(group = "Formula", label = "Post", maxLength = Short.MAX_VALUE, visible = false)
-    private String formulaPost;
+    @CCFieldConfig(group = "Effect", label = "Formula", maxLength = Short.MAX_VALUE, visible = false)
+    private String effectFormula;
     //
     transient private FbActor caster;
     transient private FbActor target;
@@ -79,14 +71,6 @@ public class FbAction extends CCEntity {
 
     public void setActionType(FbActionType actionType) {
         this.actionType = actionType;
-    }
-
-    public String getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(String attributes) {
-        this.attributes = attributes;
     }
 
     public String getName() {
@@ -113,60 +97,52 @@ public class FbAction extends CCEntity {
         this.apCost = apCost;
     }
 
-    public Float getHitRate() {
+    public Integer getHitRate() {
         return hitRate;
     }
 
-    public void setHitRate(Float hitRate) {
+    public void setHitRate(Integer hitRate) {
         this.hitRate = hitRate;
     }
 
-    public Float getVariance() {
+    public Integer getVariance() {
         return variance;
     }
 
-    public void setVariance(Float variance) {
+    public void setVariance(Integer variance) {
         this.variance = variance;
     }
 
-    public Float getCrtRate() {
+    public Integer getCrtRate() {
         return crtRate;
     }
 
-    public void setCrtRate(Float crtRate) {
+    public void setCrtRate(Integer crtRate) {
         this.crtRate = crtRate;
     }
 
-    public String getFormulaPre() {
-        return formulaPre;
+    public String getEffectPrecondition() {
+        return effectPrecondition;
     }
 
-    public void setFormulaPre(String formulaPre) {
-        this.formulaPre = formulaPre;
+    public void setEffectPrecondition(String effectPrecondition) {
+        this.effectPrecondition = effectPrecondition;
     }
 
-    public String getFormulaPower() {
-        return formulaPower;
+    public String getEffectPower() {
+        return effectPower;
     }
 
-    public void setFormulaPower(String formulaPower) {
-        this.formulaPower = formulaPower;
+    public void setEffectPower(String effectPower) {
+        this.effectPower = effectPower;
     }
 
-    public String getFormulaMain() {
-        return formulaMain;
+    public String getEffectFormula() {
+        return effectFormula;
     }
 
-    public void setFormulaMain(String formulaMain) {
-        this.formulaMain = formulaMain;
-    }
-
-    public String getFormulaPost() {
-        return formulaPost;
-    }
-
-    public void setFormulaPost(String formulaPost) {
-        this.formulaPost = formulaPost;
+    public void setEffectFormula(String effectFormula) {
+        this.effectFormula = effectFormula;
     }
 
     public FbActor getCaster() {
@@ -205,20 +181,17 @@ public class FbAction extends CCEntity {
         setCaster(caster);
         setTarget(target);
         boolean conditionMeet = true;
-        if (isNotNullAndNotEmpty(getFormulaPre())) {
-            conditionMeet = solved(this, getFormulaPre());
+        if (isNotNullAndNotEmpty(getEffectPrecondition())) {
+            conditionMeet = solved(this, getEffectPrecondition());
         }
         if (conditionMeet) {
             setPower(0);
-            if (isNotNullAndNotEmpty(getFormulaPower())) {
-                manipulate(this, getFormulaPower());
+            if (isNotNullAndNotEmpty(getEffectPower())) {
+                manipulate(this, getEffectPower());
                 //insert code here: variance, critical, and multiplier calculation
             }
-            if (isNotNullAndNotEmpty(getFormulaMain())) {
-                manipulate(this, getFormulaMain());
-            }
-            if (isNotNullAndNotEmpty(getFormulaPost())) {
-                manipulate(this, getFormulaPost());
+            if (isNotNullAndNotEmpty(getEffectFormula())) {
+                manipulate(this, getEffectFormula());
             }
         }
     }

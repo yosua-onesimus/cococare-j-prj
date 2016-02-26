@@ -48,7 +48,7 @@ public class FrmMap extends javax.swing.JFrame {
         groupLayout.setHorizontalGroup(parallelGroup = groupLayout.createParallelGroup());
         groupLayout.setVerticalGroup(sequentialGroup = groupLayout.createSequentialGroup());
         scrollPane.setViewportView(container);
-        
+
 //        Math.ceil(WIDTH);
 
         for (int y = map.getSizeY() - 1; y >= 0; y--) {

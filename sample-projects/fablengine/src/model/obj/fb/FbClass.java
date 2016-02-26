@@ -19,32 +19,31 @@ import javax.persistence.Table;
 public class FbClass extends CCEntity {
 
     @Column(length = 4)
-    @CCFieldConfig(accessible = Accessible.MANDATORY, requestFocus = true, sequence = "C000", unique = true)
+    @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY, requestFocus = true, unique = true)
     private String code;
-    //
     @Column(length = 16)
     @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY, unique = true)
     private String name;
     //
-    @CCFieldConfig(group = "Attribute", label = "HP", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3)
+    @CCFieldConfig(group = "Parameter", label = "HP", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3)
     private Integer hp = 1;
-    @CCFieldConfig(group = "Attribute", label = "AP", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
+    @CCFieldConfig(group = "Parameter", label = "AP", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer ap = 1;
-    @CCFieldConfig(group = "Attribute", label = "OFF", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
+    @CCFieldConfig(group = "Parameter", label = "OFF", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer offense = 1;
-    @CCFieldConfig(group = "Attribute", label = "DEF", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
+    @CCFieldConfig(group = "Parameter", label = "DEF", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer defense = 1;
-    @CCFieldConfig(group = "Attribute", label = "ESS", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
+    @CCFieldConfig(group = "Parameter", label = "ESS", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer essence = 1;
-    @CCFieldConfig(group = "Attribute", label = "VEL", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
+    @CCFieldConfig(group = "Parameter", label = "VEL", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer velense = 1;
-    @CCFieldConfig(group = "Attribute", label = "Balance", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3)
+    @CCFieldConfig(group = "Parameter", label = "Balance", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3)
     private Integer balance = 1;
-    @CCFieldConfig(group = "Attribute", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6)
+    @CCFieldConfig(group = "Parameter", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6)
     private Float hitRate = 90f;
-    @CCFieldConfig(group = "Attribute", label = "Eva%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6)
+    @CCFieldConfig(group = "Parameter", label = "Eva%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6)
     private Float evaRate = 10f;
-    @CCFieldConfig(group = "Attribute", label = "Crt%", accessible = Accessible.MANDATORY_READONLY, type = Type.DECIMAL, maxLength = 6)
+    @CCFieldConfig(group = "Parameter", label = "Crt%", accessible = Accessible.MANDATORY_READONLY, type = Type.DECIMAL, maxLength = 6)
     private Float crtRate = 10f;
     //
     @ManyToOne
