@@ -18,3 +18,11 @@ World May End: Malicious Threat
 World May End: Elusive Thought
  Lueur Path: Jazz
  Leere Path: Joshua
+
+ 
+Item
+  1. Sword
+Inventory
+  item
+  quantity
+  actor

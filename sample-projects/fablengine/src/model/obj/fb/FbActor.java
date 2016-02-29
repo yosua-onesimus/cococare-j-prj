@@ -50,7 +50,7 @@ public class FbActor extends CCEntity {
     @CCFieldConfig(group = "Actor Parameter", accessible = Accessible.MANDATORY, maxLength = 16, uniqueKey = "name")
     private FbAttribute attribute;
     @CCFieldConfig(group = "Actor Parameter", label = "HP", tooltiptext = "Health Point", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3, visible = false)
-    private Integer hp = 1;
+    private Integer hp = 10;
     @CCFieldConfig(group = "Actor Parameter", label = "AP", tooltiptext = "Action Point", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2, visible = false)
     private Integer ap = 1;
     @CCFieldConfig(group = "Actor Parameter", label = "LP", tooltiptext = "Lethal Point", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2, visible = false)
@@ -67,7 +67,7 @@ public class FbActor extends CCEntity {
     @CCFieldConfig(group = "Class Parameter", accessible = Accessible.MANDATORY, maxLength = 16, uniqueKey = "name")
     private FbClass class_;
     @CCFieldConfig(group = "Class Parameter", label = "HPM", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3)
-    private Integer hpMax = 1;
+    private Integer hpMax = 10;
     @CCFieldConfig(group = "Class Parameter", label = "APM", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer apMax = 1;
     @CCFieldConfig(group = "Class Parameter", label = "OFF", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
@@ -78,12 +78,15 @@ public class FbActor extends CCEntity {
     private Integer essence = 1;
     @CCFieldConfig(group = "Class Parameter", label = "VEL", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer velense = 1;
-    @CCFieldConfig(group = "Class Parameter", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6)
-    private Float hitRate = 90f;
-    @CCFieldConfig(group = "Class Parameter", label = "Eva%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6)
-    private Float evaRate = 10f;
-    @CCFieldConfig(group = "Class Parameter", label = "Crt%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6)
-    private Float crtRate = 10f;
+    @CCFieldConfig(group = "Class Parameter", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
+    private Integer hitRate = 90;
+    @CCFieldConfig(group = "Class Parameter", label = "Eva%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
+    private Integer evaRate = 10;
+    @CCFieldConfig(group = "Class Parameter", label = "Crt%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
+    private Integer crtRate = 10;
+    //
+    @CCFieldConfig(visible = false, visible2 = false)
+    transient private boolean guard = false;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">
     public String getCode() {
@@ -278,28 +281,36 @@ public class FbActor extends CCEntity {
         this.velense = velense;
     }
 
-    public Float getHitRate() {
+    public Integer getHitRate() {
         return hitRate;
     }
 
-    public void setHitRate(Float hitRate) {
+    public void setHitRate(Integer hitRate) {
         this.hitRate = hitRate;
     }
 
-    public Float getEvaRate() {
+    public Integer getEvaRate() {
         return evaRate;
     }
 
-    public void setEvaRate(Float evaRate) {
+    public void setEvaRate(Integer evaRate) {
         this.evaRate = evaRate;
     }
 
-    public Float getCrtRate() {
+    public Integer getCrtRate() {
         return crtRate;
     }
 
-    public void setCrtRate(Float crtRate) {
+    public void setCrtRate(Integer crtRate) {
         this.crtRate = crtRate;
+    }
+
+    public boolean isGuard() {
+        return guard;
+    }
+
+    public void setGuard(boolean guard) {
+        this.guard = guard;
     }
 //</editor-fold>
 }

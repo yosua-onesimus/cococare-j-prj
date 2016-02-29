@@ -8,26 +8,19 @@ public class Test {
     public static void main(String[] args) {
         FbActor caster = new FbActor();
         caster.setHp(100);
-        caster.setAp(10);
-        caster.setOffense(10);
-        caster.setDefense(10);
+        caster.setAp(100);
+        caster.setEssence(10);
 
         FbActor target = new FbActor();
         target.setHp(100);
-        target.setAp(10);
-        target.setOffense(10);
-        target.setDefense(10);
+        target.setAp(100);
+        target.setEssence(10);
 
         FbAction action = new FbAction();
-        action.setEffectFormula("target.ap-=8;caster.ap+=8");
-
-        System.out.println(caster.getAp());
-        System.out.println(target.getAp());
-
         action.execute(caster, target);
 
         System.out.println(caster.getAp());
-        System.out.println(target.getAp());
+        System.out.println(target.getHp());
     }
 }
 /**

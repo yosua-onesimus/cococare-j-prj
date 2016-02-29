@@ -5,10 +5,12 @@ import cococare.common.CCFieldConfig;
 import cococare.common.CCFieldConfig.Accessible;
 import cococare.common.CCFieldConfig.Type;
 import static cococare.common.CCLogic.isNotNullAndNotEmpty;
+import static cococare.common.CCLogic.isNullOrEmpty;
 import static cococare.common.CCMath.manipulate;
 import static cococare.common.CCMath.solved;
 import cococare.common.CCTypeConfig;
 import cococare.database.CCEntity;
+import java.util.Random;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -34,27 +36,31 @@ public class FbAction extends CCEntity {
     private String description;
     @CCFieldConfig(group = "General", label = "AP Cost", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer apCost = 1;
-    @CCFieldConfig(group = "General", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
+    @CCFieldConfig(group = "General", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2, visible = false)
     private Integer hitRate = 90;
-    @CCFieldConfig(group = "General", label = "Var%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
-    private Integer variance = 10;
-    @CCFieldConfig(group = "General", label = "Crt%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
+    @CCFieldConfig(group = "General", label = "Crt%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2, visible = false)
     private Integer crtRate = 10;
+    @CCFieldConfig(group = "General", label = "Var%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2, visible = false)
+    private Integer variance = 10;
     //
     @Column(length = 255)
     @CCFieldConfig(group = "Effect", label = "Precondition", maxLength = Short.MAX_VALUE, visible = false)
     private String effectPrecondition;
     @Column(length = 255)
     @CCFieldConfig(group = "Effect", label = "Power", maxLength = Short.MAX_VALUE, visible = false)
-    private String effectPower;
+    private String effectPower = "power=caster.essence";
     @Column(length = 255)
     @CCFieldConfig(group = "Effect", label = "Formula", maxLength = Short.MAX_VALUE, visible = false)
-    private String effectFormula;
+    private String effectFormula = "target.hp-=power";
     //
+    @CCFieldConfig(visible = false, visible2 = false)
     transient private FbActor caster;
+    @CCFieldConfig(visible = false, visible2 = false)
     transient private FbActor target;
-    transient private Integer power;
-    transient private Integer temp;
+    @CCFieldConfig(visible = false, visible2 = false)
+    transient private Integer power = 0;
+    @CCFieldConfig(visible = false, visible2 = false)
+    transient private Integer temp = 0;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">
     public String getCode() {
@@ -105,20 +111,20 @@ public class FbAction extends CCEntity {
         this.hitRate = hitRate;
     }
 
-    public Integer getVariance() {
-        return variance;
-    }
-
-    public void setVariance(Integer variance) {
-        this.variance = variance;
-    }
-
     public Integer getCrtRate() {
         return crtRate;
     }
 
     public void setCrtRate(Integer crtRate) {
         this.crtRate = crtRate;
+    }
+
+    public Integer getVariance() {
+        return variance;
+    }
+
+    public void setVariance(Integer variance) {
+        this.variance = variance;
     }
 
     public String getEffectPrecondition() {
@@ -180,18 +186,36 @@ public class FbAction extends CCEntity {
     public void execute(FbActor caster, FbActor target) {
         setCaster(caster);
         setTarget(target);
-        boolean conditionMeet = true;
-        if (isNotNullAndNotEmpty(getEffectPrecondition())) {
-            conditionMeet = solved(this, getEffectPrecondition());
-        }
-        if (conditionMeet) {
-            setPower(0);
-            if (isNotNullAndNotEmpty(getEffectPower())) {
-                manipulate(this, getEffectPower());
-                //insert code here: variance, critical, and multiplier calculation
-            }
-            if (isNotNullAndNotEmpty(getEffectFormula())) {
-                manipulate(this, getEffectFormula());
+        if (isNullOrEmpty(getEffectPrecondition())
+                || solved(this, getEffectPrecondition())) {
+            caster.setAp(caster.getAp() - getApCost());
+            //does the action hit?
+            //did the target evade the action?
+            if ((((getCaster().getHitRate() + getHitRate()) / 2) > new Random().nextInt(100))
+                    && !(getTarget().getEvaRate() > new Random().nextInt(100))) {
+                //then evaluate the damage formula :: step 1
+                if (isNotNullAndNotEmpty(getEffectPower())) {
+                    //apply power formula
+                    manipulate(this, getEffectPower());
+                    //apply element rate
+
+                    //apply modifiers
+
+                    //apply crtRate
+                    if ((((getCaster().getCrtRate() + getCrtRate()) / 2) - getTarget().getEvaRate()) > new Random().nextInt(100)) {
+                        power *= 3;
+                    }
+                    //apply variance
+                    power -= getVariance();
+                    power += new Random().nextInt(2 * getVariance() + 1);
+                    //apply guard
+                    if (getTarget().isGuard()) {
+                    }
+                }
+                //then evaluate the damage formula :: step 2
+                if (isNotNullAndNotEmpty(getEffectFormula())) {
+                    manipulate(this, getEffectFormula());
+                }
             }
         }
     }

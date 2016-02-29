@@ -3,29 +3,28 @@ package model.obj.fb;
 //<editor-fold defaultstate="collapsed" desc=" import ">
 import cococare.common.CCFieldConfig;
 import cococare.common.CCFieldConfig.Accessible;
-import cococare.common.CCFieldConfig.Type;
 import cococare.common.CCTypeConfig;
 import cococare.database.CCEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 //</editor-fold>
 
 @Entity
-@Table(name = "fb_maps")
-@CCTypeConfig(label = "Map", uniqueKey = "name", parameter = true, controllerClass = "controller.form.fb.PnlMapCtrl")
-public class FbMap extends CCEntity {
+@Table(name = "fb_items")
+@CCTypeConfig(label = "Item", uniqueKey = "name", parameter = true)
+public class FbItem extends CCEntity {
 
-    @Column(length = 4)
+    @Column(length = 12)
     @CCFieldConfig(accessible = Accessible.MANDATORY, requestFocus = true, unique = true)
     private String code;
     @Column(length = 16)
     @CCFieldConfig(accessible = Accessible.MANDATORY, unique = true)
     private String name;
-    @CCFieldConfig(accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
-    private Integer sizeX = 1;
-    @CCFieldConfig(accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
-    private Integer sizeY = 1;
+    @ManyToOne
+    @CCFieldConfig(accessible = Accessible.MANDATORY, maxLength = 16, uniqueKey = "name")
+    private FbItemType itemType;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">
     public String getCode() {
@@ -44,20 +43,12 @@ public class FbMap extends CCEntity {
         this.name = name;
     }
 
-    public Integer getSizeX() {
-        return sizeX;
+    public FbItemType getItemType() {
+        return itemType;
     }
 
-    public void setSizeX(Integer sizeX) {
-        this.sizeX = sizeX;
-    }
-
-    public Integer getSizeY() {
-        return sizeY;
-    }
-
-    public void setSizeY(Integer sizeY) {
-        this.sizeY = sizeY;
+    public void setItemType(FbItemType itemType) {
+        this.itemType = itemType;
     }
 //</editor-fold>
 }

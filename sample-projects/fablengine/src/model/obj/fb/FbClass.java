@@ -26,7 +26,7 @@ public class FbClass extends CCEntity {
     private String name;
     //
     @CCFieldConfig(group = "Parameter", label = "HP", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3)
-    private Integer hp = 1;
+    private Integer hp = 10;
     @CCFieldConfig(group = "Parameter", label = "AP", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer ap = 1;
     @CCFieldConfig(group = "Parameter", label = "OFF", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
@@ -39,12 +39,12 @@ public class FbClass extends CCEntity {
     private Integer velense = 1;
     @CCFieldConfig(group = "Parameter", label = "Balance", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3)
     private Integer balance = 1;
-    @CCFieldConfig(group = "Parameter", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6)
-    private Float hitRate = 90f;
-    @CCFieldConfig(group = "Parameter", label = "Eva%", accessible = Accessible.MANDATORY, type = Type.DECIMAL, maxLength = 6)
-    private Float evaRate = 10f;
-    @CCFieldConfig(group = "Parameter", label = "Crt%", accessible = Accessible.MANDATORY_READONLY, type = Type.DECIMAL, maxLength = 6)
-    private Float crtRate = 10f;
+    @CCFieldConfig(group = "Parameter", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
+    private Integer hitRate = 90;
+    @CCFieldConfig(group = "Parameter", label = "Eva%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
+    private Integer evaRate = 10;
+    @CCFieldConfig(group = "Parameter", label = "Crt%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
+    private Integer crtRate = 10;
     //
     @ManyToOne
     @CCFieldConfig(group = "Special", accessible = Accessible.MANDATORY, maxLength = 16, uniqueKey = "name")
@@ -123,27 +123,27 @@ public class FbClass extends CCEntity {
         this.balance = balance;
     }
 
-    public Float getHitRate() {
+    public Integer getHitRate() {
         return hitRate;
     }
 
-    public void setHitRate(Float hitRate) {
+    public void setHitRate(Integer hitRate) {
         this.hitRate = hitRate;
     }
 
-    public Float getEvaRate() {
+    public Integer getEvaRate() {
         return evaRate;
     }
 
-    public void setEvaRate(Float evaRate) {
+    public void setEvaRate(Integer evaRate) {
         this.evaRate = evaRate;
     }
 
-    public Float getCrtRate() {
+    public Integer getCrtRate() {
         return crtRate;
     }
 
-    public void setCrtRate(Float crtRate) {
+    public void setCrtRate(Integer crtRate) {
         this.crtRate = crtRate;
     }
 
@@ -157,7 +157,7 @@ public class FbClass extends CCEntity {
 
     public void calculate() {
         manipulate(this, "balance=hp/10+ap+offense+defense+essence+velense");
-        manipulate(this, "crtRate=(offense-2)*10");
+        manipulate(this, "crtRate=(10-offense)*10");
     }
 //</editor-fold>
 }
