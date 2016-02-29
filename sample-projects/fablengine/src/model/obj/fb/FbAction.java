@@ -36,11 +36,11 @@ public class FbAction extends CCEntity {
     private String description;
     @CCFieldConfig(group = "General", label = "AP Cost", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2)
     private Integer apCost = 1;
-    @CCFieldConfig(group = "General", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2, visible = false)
+    @CCFieldConfig(group = "General", label = "Hit%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3, visible = false)
     private Integer hitRate = 90;
-    @CCFieldConfig(group = "General", label = "Crt%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2, visible = false)
+    @CCFieldConfig(group = "General", label = "Crt%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3, visible = false)
     private Integer crtRate = 10;
-    @CCFieldConfig(group = "General", label = "Var%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 2, visible = false)
+    @CCFieldConfig(group = "General", label = "Var%", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3, visible = false)
     private Integer variance = 10;
     //
     @Column(length = 255)

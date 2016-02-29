@@ -24,26 +24,6 @@ public class Test {
     }
 }
 /**
- * energy: max 100, digunakan untuk movement, tiap terrain punya movement cost beda2 energy
- * direcover tiap 1 menit sekali action: digunakan untuk examine object, execute skill untuk Priest
- * HP/EP akan digenerate bergantian tiap 1 menit sekali untuk Amazer AP/EP akan digenerate
- * bergantian tiap 1 menit sekali untuk knight untuk oracle bisa melakukan capture enemy building
- * tanpa harus destroy, bidding untuk hunter bisa melakukan snipe/missile attack untuk Ranger EP
- * yang digenerate +1
- *
- * jika dapet item bonus dapat terjadi overfill
- */
-/**
- * lethal point: point yang diakibatkan karena menerima damaga max 10, dapat terjadi overfill
- */
-/**
- * actor
- *
- * battleparticipant - actor - ailment/condition - offense*=2;
- *
- * absorb, null, weak, normal, strong
- */
-/**
  * Cold Bonus	Frozen	beku, hanya bisa psionic, ess berkurang, memperbesar damage bolt, dapat
  * dihilangkan dengan fire Fire Bonus	Scorch	terbakar, hp berkurang, def berkurang, memperbesar
  * damage aqua, dapat dihilangkan dengan cold Aqua Bonus	Puffed	sesak nafas, ap berkurang, def
@@ -51,17 +31,4 @@ public class Test {
  * hanya bisa physical, off berkurang, memperbesar damage cold, hilang jika terkena aqua Land	Heavy
  * a character inflicted with heavy has it's movement speed reduced. Wind	Dizzy	Attacks both enemies
  * and allies indiscriminately and uncontrollably.
- */
-/**
- * 1. copy actor to battle participant
- * 2. each damage decrease actor parameter
- * 3. each action will calculate parameter
- * sample: actor.offense <-- setelah dikurangi dengan break skill 
- * copy battle participant ke action participant
- * get list condition, evaluate satu2
- * 
- * 
- * setiap akhir action sync up hp dan ap
- * 
- * 
  */

@@ -7,7 +7,8 @@ import cococare.common.CCFieldConfig;
 import cococare.common.CCFieldConfig.AccessValue;
 import cococare.common.CCFieldConfig.Accessible;
 import cococare.common.CCFieldConfig.Type;
-import static cococare.common.CCFormat.*;
+import static cococare.common.CCFormat.getBoolean;
+import static cococare.common.CCFormat.parseInt;
 import static cococare.common.CCLogic.isNotNullAndNotEmpty;
 import static cococare.common.CCLogic.isNullOrEmpty;
 import cococare.common.CCTypeConfig;
@@ -90,11 +91,6 @@ public class FbState extends CCEntity {
     //
     @CCFieldConfig(accessValue = AccessValue.METHOD, maxLength = Short.MAX_VALUE, visible2 = false)
     transient private String description = "";
-    //
-    @CCFieldConfig(visible = false, visible2 = false)
-    transient private FbActor targetBeforeFirstTime;
-    @CCFieldConfig(visible = false, visible2 = false)
-    transient private FbActor targetAfterFirstTime;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">
     public String getCode() {
@@ -335,7 +331,7 @@ public class FbState extends CCEntity {
                             if ("cancelAtBattleEnd".equalsIgnoreCase(field.getFieldName())) {
                                 description += "Cancel At Battle End;";
                             } else {
-                                description += field.getLabel() + ";";
+                                description += field.getLabel() + "; ";
                             }
                         }
                     } else if (Integer.class.equals(field.getType())) {
@@ -344,7 +340,7 @@ public class FbState extends CCEntity {
                         }
                     } else if (String.class.equals(field.getType())) {
                         Object value = field.getValue();
-                        description += isNotNullAndNotEmpty(value) ? value + ";" : "";
+                        description += isNotNullAndNotEmpty(value) ? value + "; " : "";
                     }
                 }
                 if ("cancelAtBattleEnd".equalsIgnoreCase(field.getFieldName())) {
@@ -357,22 +353,6 @@ public class FbState extends CCEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public FbActor getTargetBeforeFirstTime() {
-        return targetBeforeFirstTime;
-    }
-
-    public void setTargetBeforeFirstTime(FbActor targetBeforeFirstTime) {
-        this.targetBeforeFirstTime = targetBeforeFirstTime;
-    }
-
-    public FbActor getTargetAfterFirstTime() {
-        return targetAfterFirstTime;
-    }
-
-    public void setTargetAfterFirstTime(FbActor targetAfterFirstTime) {
-        this.targetAfterFirstTime = targetAfterFirstTime;
     }
 //</editor-fold>
 }

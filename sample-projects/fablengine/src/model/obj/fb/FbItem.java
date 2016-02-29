@@ -17,13 +17,13 @@ import javax.persistence.Table;
 public class FbItem extends CCEntity {
 
     @Column(length = 12)
-    @CCFieldConfig(accessible = Accessible.MANDATORY, requestFocus = true, unique = true)
+    @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY, requestFocus = true, unique = true)
     private String code;
     @Column(length = 16)
-    @CCFieldConfig(accessible = Accessible.MANDATORY, unique = true)
+    @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY, unique = true)
     private String name;
     @ManyToOne
-    @CCFieldConfig(accessible = Accessible.MANDATORY, maxLength = 16, uniqueKey = "name")
+    @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY, maxLength = 16, uniqueKey = "name")
     private FbItemType itemType;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">

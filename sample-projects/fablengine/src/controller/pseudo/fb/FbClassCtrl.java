@@ -48,6 +48,6 @@ public class FbClassCtrl extends PnlParameterCtrl {
                 + parseInt(txtEssence.getText())
                 + parseInt(txtVelense.getText())));
         txtCrtRate.setText(formatDecimal(
-                (parseInt(txtOffense.getText()) - 2) * 10));
+                (10 - parseInt(txtOffense.getText())) * 10));
     }
 }

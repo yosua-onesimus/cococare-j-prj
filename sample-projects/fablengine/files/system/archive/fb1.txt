@@ -44,3 +44,8 @@ Griffin Wind Wing Armor
 Virtues Holy Wing Armor
 Cyclops Land Wing Armor
 Eclipse Void Wing Armor
+
+HP: Health Point
+AP: Action Point, untuk execute skill
+LP: Lethal Point, max 10, variant skill, terisi jika kena attack
+EP: Energy Point, max 100, untuk movement, tiap terrain type costnya berbeda
