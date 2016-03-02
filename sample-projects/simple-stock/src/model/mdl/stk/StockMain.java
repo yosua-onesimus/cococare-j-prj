@@ -25,7 +25,7 @@ public class StockMain extends CFSwingMain {
         APPL_CODE = "simple-stock";
         APPL_LOGO = "/cococare/resource/icon-cococare.jpg";
         APPL_NAME = "Simple Stock";
-        APPL_VER = "2.0.151118";
+        APPL_VER = "2.0.150913";
         super._loadInternalSetting();
         StkReport.setupReportFile(StkReport.Report.class);
     }
