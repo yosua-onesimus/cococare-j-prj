@@ -5,18 +5,15 @@ import static cococare.common.CCClass.getValue;
 import static cococare.common.CCFormat.*;
 import cococare.framework.swing.controller.form.util.PnlParameterCtrl;
 import static cococare.swing.CCSwing.addListener;
-import static cococare.swing.CCSwing.addListener2;
 import cococare.swing.component.CCBandBox;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
-import model.bo.DragonBo;
 //</editor-fold>
 
 public class DragonCtrl extends PnlParameterCtrl {
 
 //<editor-fold defaultstate="collapsed" desc=" private object ">
-    private DragonBo dragonBo;
     private String code;
     private String customName;
     private JTextField txtCode;
@@ -25,9 +22,6 @@ public class DragonCtrl extends PnlParameterCtrl {
     private CCBandBox txtHabitatType2;
     private CCBandBox txtHabitatType3;
     private CCBandBox txtHabitatType4;
-    private JTextField txtRevenues;
-    private JTextField txtRevenuesPercent;
-    private JTextField txtRevenuesTotal;
 //</editor-fold>
 
     @Override
@@ -43,14 +37,6 @@ public class DragonCtrl extends PnlParameterCtrl {
         addListener(txtHabitatType2, alUpdateTxtCodeAndTxtName);
         addListener(txtHabitatType3, alUpdateTxtCodeAndTxtName);
         addListener(txtHabitatType4, alUpdateTxtCodeAndTxtName);
-        ActionListener alUpdateTxtRevenuesTotal = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                _doUpdateTxtRevenuesTotal();
-            }
-        };
-        addListener2(txtRevenues, alUpdateTxtRevenuesTotal);
-        addListener2(txtRevenuesPercent, alUpdateTxtRevenuesTotal);
     }
 
     private void _fillCodeAndCustomName(CCBandBox bandBox) {
@@ -68,12 +54,5 @@ public class DragonCtrl extends PnlParameterCtrl {
         _fillCodeAndCustomName(txtHabitatType4);
         txtCode.setText("D" + code);
         txtCustomName.setText(customName + "Gon");
-    }
-
-    private void _doUpdateTxtRevenuesTotal() {
-        txtRevenuesTotal.setText(
-                formatNumeric(dragonBo.countRevenuesTotal(
-                unformatNumber(txtRevenues.getText()),
-                unformatNumber(txtRevenuesPercent.getText()))));
     }
 }

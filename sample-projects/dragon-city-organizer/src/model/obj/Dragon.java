@@ -46,10 +46,8 @@ public class Dragon extends CCEntity {
     private Integer level = 10;
     @CCFieldConfig(label = "Rev", tooltiptext = "Revenues", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3)
     private Integer revenues = 0;
-    @CCFieldConfig(label = "Rev (%)", tooltiptext = "Revenues Percent", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 3, visible = false)
-    private Integer revenuesPercent = 0;
-    @CCFieldConfig(label = "Rev Ttl", tooltiptext = "Revenues Total", accessible = Accessible.MANDATORY_READONLY, type = Type.NUMERIC, maxLength = 3, visible = false)
-    private Integer revenuesTotal = 0;
+    @CCFieldConfig(accessible = Accessible.MANDATORY, maxLength = 8, visible = false)
+    private Boolean dragonarium = false;
     //
     @ManyToOne
     @CCFieldConfig(maxLength = 20, uniqueKey = "@habitatType.name #@no", visible2 = false)
@@ -136,20 +134,12 @@ public class Dragon extends CCEntity {
         this.revenues = revenues;
     }
 
-    public Integer getRevenuesPercent() {
-        return revenuesPercent;
+    public Boolean getDragonarium() {
+        return dragonarium;
     }
 
-    public void setRevenuesPercent(Integer revenuesPercent) {
-        this.revenuesPercent = revenuesPercent;
-    }
-
-    public Integer getRevenuesTotal() {
-        return revenuesTotal;
-    }
-
-    public void setRevenuesTotal(Integer revenuesTotal) {
-        this.revenuesTotal = revenuesTotal;
+    public void setDragonarium(Boolean dragonarium) {
+        this.dragonarium = dragonarium;
     }
 
     public Habitat getHabitat() {

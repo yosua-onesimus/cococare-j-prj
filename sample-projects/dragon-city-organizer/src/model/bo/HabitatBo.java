@@ -18,7 +18,7 @@ public class HabitatBo extends CCHibernateBo {
 //<editor-fold defaultstate="collapsed" desc=" public method ">
     public synchronized boolean saveOrUpdate(Habitat habitat) {
         habitat.setTotalDragon(parseInt(dragonDao.countBy(habitat)));
-        habitat.setTotalRevenues(dragonDao.sumRevenuesTotalBy(habitat));
+        habitat.setTotalRevenues(dragonDao.sumRevenuesBy(habitat));
         return habitatDao.saveOrUpdate(habitat);
     }
 //</editor-fold>

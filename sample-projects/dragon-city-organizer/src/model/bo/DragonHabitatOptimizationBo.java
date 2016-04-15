@@ -21,7 +21,6 @@ public class DragonHabitatOptimizationBo extends CCHibernateBo {
     private DragonDao dragonDao;
     //
     private HabitatBo habitatBo = new HabitatBo();
-    private DragonBo dragonBo = new DragonBo();
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc=" public method ">
@@ -48,7 +47,6 @@ public class DragonHabitatOptimizationBo extends CCHibernateBo {
                 }
                 //3.2. distribute dragon
                 for (Dragon dragon : dragons) {
-                    dragon.setRevenuesTotal(dragonBo.countRevenuesTotal(dragon.getRevenues(), dragon.getRevenuesPercent()));
                     Habitat habitat = habitatDao.getMinTotalRevenuesBy(habitatType);
                     dragon.setHabitat(habitat);
                     success &= dragonDao.saveOrUpdate(dragon);

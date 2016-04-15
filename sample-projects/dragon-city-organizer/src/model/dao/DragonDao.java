@@ -39,6 +39,7 @@ public class DragonDao extends DragonCityOrganizerDao {
                 set("habitatType", habitatType);
         if (isNotNull(hasHabitat)) {
             hql.where(hasHabitat ? "habitat IS NOT NULL" : "habitat IS NULL");
+            hql.where("dragonarium = FALSE");
             if (!hasHabitat) {
                 hql.orderBy("revenues DESC").
                         orderBy("code DESC").
@@ -48,9 +49,9 @@ public class DragonDao extends DragonCityOrganizerDao {
         return getListUnlimitedBy(hql.value(), parameters.value());
     }
 
-    public int sumRevenuesTotalBy(Habitat habitat) {
+    public int sumRevenuesBy(Habitat habitat) {
         hql.start().
-                select("SUM(revenuesTotal)").
+                select("SUM(revenues)").
                 where("habitat = :habitat");
         parameters.start().
                 set("habitat", habitat);
