@@ -509,6 +509,75 @@ public class NoX_SimpleAndCleanCode {
     }
 
     public static void sampleHighcharts_sampleStackedAndGroupedColumn() {
+        CCHighcharts highcharts = new CCHighcharts();
+        highcharts.getChart().setRenderTo("container");
+        highcharts.getChart().setType(ChartType.column);
+        highcharts.getTitle().setText("Total fruit consumtion, grouped by gender");
+        highcharts.getxAxis().getCategories().addAll(Arrays.asList("Apples", "Oranges", "Pears", "Grapes", "Bananas"));
+        highcharts.getyAxis().setMin(0);
+        highcharts.getyAxis().getTitle().setText("Number of fruits");
+        highcharts.getTooltip().setFormatter("'<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '<br/>' + 'Total: ' + this.point.stackTotal");
+        highcharts.getPlotOptions().getSeries().setStacking(Stacking.normal);
+        Serial serial = highcharts.newSerial();
+        serial.setName("John");
+        serial.getData().addAll(Arrays.asList(5, 3, 4, 7, 2));
+        serial.setStack("male");
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Joe");
+        serial.getData().addAll(Arrays.asList(3, 4, 4, 2, 5));
+        serial.setStack("male");
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Jane");
+        serial.getData().addAll(Arrays.asList(2, 5, 6, 2, 1));
+        serial.setStack("female");
+        highcharts.getSeries().add(serial);
+        serial = highcharts.newSerial();
+        serial.setName("Janet");
+        serial.getData().addAll(Arrays.asList(3, 0, 4, 4, 3));
+        serial.setStack("female");
+        highcharts.getSeries().add(serial);
+        println(highcharts.compile());
+    }
+
+    public static void sampleHighcharts_samplePieChart() {
+        CCHighcharts highcharts = new CCHighcharts();
+        highcharts.getChart().setRenderTo("container");
+        highcharts.getChart().setType(ChartType.pie);
+        highcharts.getTitle().setText("Browser market shares January, 2015 to May, 2015");
+        highcharts.getTooltip().setPointFormat("{series.name}: <b>{point.percentage:.1f}%</b>");
+        highcharts.getPlotOptions().getSeries().getDataLabels().setFormat("<b>{point.name}</b>: {point.percentage:.1f} %");
+        Serial serial = highcharts.newSerial();
+        serial.setName("Brands");
+        {
+            Serial serial2 = highcharts.newSerial();
+            serial2.setName("Microsoft Internet Explorer");
+            serial2.setY(56.33);
+            serial.getData().add(serial2);
+            serial2 = highcharts.newSerial();
+            serial2.setName("Chrome");
+            serial2.setY(24.03);
+            serial.getData().add(serial2);
+            serial2 = highcharts.newSerial();
+            serial2.setName("Firefox");
+            serial2.setY(10.38);
+            serial.getData().add(serial2);
+            serial2 = highcharts.newSerial();
+            serial2.setName("Safari");
+            serial2.setY(4.77);
+            serial.getData().add(serial2);
+            serial2 = highcharts.newSerial();
+            serial2.setName("Opera");
+            serial2.setY(0.91);
+            serial.getData().add(serial2);
+            serial2 = highcharts.newSerial();
+            serial2.setName("Proprietary or Undetectable");
+            serial2.setY(0.2);
+            serial.getData().add(serial2);
+        }
+        highcharts.getSeries().add(serial);
+        println(highcharts.compile());
     }
 //</editor-fold>
 
@@ -908,6 +977,6 @@ public class NoX_SimpleAndCleanCode {
 //</editor-fold>
 
     public static void main(String[] args) {
-        sampleMail();
+        sampleHighcharts_samplePieChart();
     }
 }
