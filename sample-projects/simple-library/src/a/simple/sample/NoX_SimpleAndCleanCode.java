@@ -233,7 +233,6 @@ public class NoX_SimpleAndCleanCode {
         highcharts.getSubtitle().setText("According to the Standard Atmosphere Model");
         highcharts.getxAxis().getTitle().setText("Altitude");
         highcharts.getxAxis().getLabels().setFormatter("this.value + 'km'");
-        highcharts.getxAxis().setReversed(false);
         highcharts.getyAxis().getTitle().setText("Temperature");
         highcharts.getyAxis().getLabels().setFormatter("this.value + '°C'");
         highcharts.getLegend().setEnabled(false);
@@ -541,7 +540,7 @@ public class NoX_SimpleAndCleanCode {
         println(highcharts.compile());
     }
 
-    public static void sampleHighcharts_samplePieChart() {
+    public static void sampleHighcharts_samplePie() {
         CCHighcharts highcharts = new CCHighcharts();
         highcharts.getChart().setRenderTo("container");
         highcharts.getChart().setType(ChartType.pie);
@@ -550,34 +549,44 @@ public class NoX_SimpleAndCleanCode {
         highcharts.getPlotOptions().getSeries().getDataLabels().setFormat("<b>{point.name}</b>: {point.percentage:.1f} %");
         Serial serial = highcharts.newSerial();
         serial.setName("Brands");
-        {
-            Serial serial2 = highcharts.newSerial();
-            serial2.setName("Microsoft Internet Explorer");
-            serial2.setY(56.33);
-            serial.getData().add(serial2);
-            serial2 = highcharts.newSerial();
-            serial2.setName("Chrome");
-            serial2.setY(24.03);
-            serial.getData().add(serial2);
-            serial2 = highcharts.newSerial();
-            serial2.setName("Firefox");
-            serial2.setY(10.38);
-            serial.getData().add(serial2);
-            serial2 = highcharts.newSerial();
-            serial2.setName("Safari");
-            serial2.setY(4.77);
-            serial.getData().add(serial2);
-            serial2 = highcharts.newSerial();
-            serial2.setName("Opera");
-            serial2.setY(0.91);
-            serial.getData().add(serial2);
-            serial2 = highcharts.newSerial();
-            serial2.setName("Proprietary or Undetectable");
-            serial2.setY(0.2);
-            serial.getData().add(serial2);
-        }
+        serial.getData().addAll(Arrays.asList(
+                highcharts.newPoint1("Microsoft Internet Explorer", null, 56.33),
+                highcharts.newPoint1("Chrome", null, 24.03),
+                highcharts.newPoint1("Firefox", null, 10.38),
+                highcharts.newPoint1("Safari", null, 4.77),
+                highcharts.newPoint1("Opera", null, 0.91),
+                highcharts.newPoint1("Proprietary or Undetectable", null, 0.2)));
         highcharts.getSeries().add(serial);
         println(highcharts.compile());
+    }
+
+    public static void sampleHighcharts_sampleSemiCircleDonut() {
+        CCHighcharts highcharts = new CCHighcharts();
+        highcharts.getChart().setRenderTo("container");
+        highcharts.getChart().setType(ChartType.pie);
+        highcharts.getTitle().setText("Browser<br>shares<br>2015");
+        highcharts.getTooltip().setPointFormat("{series.name}: <b>{point.percentage:.1f}%</b>");
+        highcharts.getPlotOptions().getSeries().getDataLabels().setDistance(-30);
+        highcharts.getPlotOptions().getPie().setStartAngle(-90);
+        highcharts.getPlotOptions().getPie().setEndAngle(90);
+        Serial serial = highcharts.newSerial();
+        serial.setName("Browser share");
+        serial.setInnerSize("50%");
+        serial.getData().addAll(Arrays.asList(
+                highcharts.newList("Firefox", 10.38),
+                highcharts.newList("IE", 56.33),
+                highcharts.newList("Chrome", 24.03),
+                highcharts.newList("Safari", 4.77),
+                highcharts.newList("Opera", 0.91),
+                highcharts.newPoint1("Proprietary or Undetectable", null, 0.2)));
+        highcharts.getSeries().add(serial);
+        println(highcharts.compile());
+    }
+
+    public static void sampleHighcharts_samplePieWithDrilldown() {
+    }
+
+    public static void sampleHighcharts_sampleColumnLineAndPie() {
     }
 //</editor-fold>
 
@@ -977,6 +986,6 @@ public class NoX_SimpleAndCleanCode {
 //</editor-fold>
 
     public static void main(String[] args) {
-        sampleHighcharts_samplePieChart();
+        sampleHighcharts_sampleSemiCircleDonut();
     }
 }
