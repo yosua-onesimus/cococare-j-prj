@@ -15,14 +15,12 @@ World May End System
    Cleric, Qigong, Escort, Lancer, Medico, Fencer
    Bishop, Wizard, Slayer, Viking/Nereid, Gunner, Jester/Dancer
    Indian, Zonero, Yakuza, Xyclon, Techno, Umpire
-  WME: MatterSphere
-   Fire, Cold, Aqua, Bolt
-   Wind, Land, Holy, Dark
-   Void, Iron, Time, Rune
   WME: SpiritSphere
-   Fiama, Glace, Acqua, Tuono
-   Luvia, Boden, Lueur, Enfer
-   Leere
+   Fiama, Glace, Acqua, Tuono, Luvia, Boden,
+   Lueur, Enfer, Leere, Eisen, Volta, ?????
+  WME: MatterSphere
+   Fire, Cold, Aqua, Bolt, Wind, Land,
+   Holy, Dark, Void, Iron, Time, Rune
   WME: AssistSphere
    AP to Attack: AP spent to inc Attack
    AP to Defend: AP spent to dec damage
@@ -38,14 +36,32 @@ Sphere
  o Fire Matter
  Lo Matter Defend
 
-Phoenix Fire Wing Armor 
-Cygnice Cold Wing Armor
-Griffin Wind Wing Armor
-Virtues Holy Wing Armor
-Cyclops Land Wing Armor
-Eclipse Void Wing Armor
+---===Vermilion Bird Wings Armor===---
+Fire Phoenix
+Cold Cygnice
+Wind Griffin
+Holy Virtues
+Land Cyclops
+Void Eclipse
 
 HP: Health Point
 AP: Action Point, untuk execute skill
 LP: Lethal Point, max 10, variant skill, terisi jika kena attack
 EP: Energy Point, max 100, untuk movement, tiap terrain type costnya berbeda
+
+---===White Tiger===---
+Coats Armor
+Jaguar (Panthera onca)
+Leopard (Panthera pardus)
+Cheetah (Acinonyx jubatus)
+
+http://www.bigcats.com/learn-to-identify-the-big-cats
+https://id.pinterest.com/pin/90212798758233064/
+---===Black Turtle===---
+Shell Armor
+---===Azure Dragon===---
+Scales Armor
+
+notes:
+http://www.onmarkproductions.com/html/ssu-ling.shtml
+https://en.wikipedia.org/wiki/Four_Symbols_(China)

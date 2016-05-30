@@ -29,6 +29,8 @@ public class FbState extends CCEntity {
     @Column(length = 16)
     @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY, unique = true)
     private String name;
+    @CCFieldConfig(accessValue = AccessValue.METHOD, maxLength = Short.MAX_VALUE, visible2 = false)
+    transient private String description = "";
     //
     @CCFieldConfig(group = "Affected Chance", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
     private Integer a = 0;
@@ -88,9 +90,6 @@ public class FbState extends CCEntity {
     private Integer cancelByTurn = 0;
     @CCFieldConfig(group = "Cancel Chance", label = "At Battle End", visible = false)
     private Boolean cancelAtBattleEnd = false;
-    //
-    @CCFieldConfig(accessValue = AccessValue.METHOD, maxLength = Short.MAX_VALUE, visible2 = false)
-    transient private String description = "";
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">
     public String getCode() {
@@ -107,6 +106,50 @@ public class FbState extends CCEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        if (isNullOrEmpty(description)) {
+            boolean isDescription = false;
+            for (CCField field : getCCFields(this)) {
+                if ("parameterChange".equalsIgnoreCase(field.getFieldName())) {
+                    isDescription = true;
+                }
+                if (isDescription) {
+                    if (Boolean.class.equals(field.getType())) {
+                        boolean value = getBoolean(field.getValue());
+                        if (value) {
+                            if ("cancelAtBattleEnd".equalsIgnoreCase(field.getFieldName())) {
+                                description += "Cancel At Battle End;";
+                            } else {
+                                description += field.getLabel() + "; ";
+                            }
+                        }
+                    } else if (Integer.class.equals(field.getType())) {
+                        int value = parseInt(field.getValue());
+                        if (value > 0) {
+                        }
+                    } else if (String.class.equals(field.getType())) {
+                        Object value = field.getValue();
+                        if (isNotNullAndNotEmpty(value)) {
+                            if ("effectPrecondition".equalsIgnoreCase(field.getFieldName())) {
+                                description += field.getLabel() + ":" + value + "; ";
+                            } else {
+                                description += value + "; ";
+                            }
+                        }
+                    }
+                }
+                if ("cancelAtBattleEnd".equalsIgnoreCase(field.getFieldName())) {
+                    break;
+                }
+            }
+        }
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getA() {
@@ -315,44 +358,6 @@ public class FbState extends CCEntity {
 
     public void setCancelAtBattleEnd(Boolean cancelAtBattleEnd) {
         this.cancelAtBattleEnd = cancelAtBattleEnd;
-    }
-
-    public String getDescription() {
-        if (isNullOrEmpty(description)) {
-            boolean isDescription = false;
-            for (CCField field : getCCFields(this)) {
-                if ("parameterChange".equalsIgnoreCase(field.getFieldName())) {
-                    isDescription = true;
-                }
-                if (isDescription) {
-                    if (Boolean.class.equals(field.getType())) {
-                        boolean value = getBoolean(field.getValue());
-                        if (value) {
-                            if ("cancelAtBattleEnd".equalsIgnoreCase(field.getFieldName())) {
-                                description += "Cancel At Battle End;";
-                            } else {
-                                description += field.getLabel() + "; ";
-                            }
-                        }
-                    } else if (Integer.class.equals(field.getType())) {
-                        int value = parseInt(field.getValue());
-                        if (value > 0) {
-                        }
-                    } else if (String.class.equals(field.getType())) {
-                        Object value = field.getValue();
-                        description += isNotNullAndNotEmpty(value) ? value + "; " : "";
-                    }
-                }
-                if ("cancelAtBattleEnd".equalsIgnoreCase(field.getFieldName())) {
-                    break;
-                }
-            }
-        }
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 //</editor-fold>
 }

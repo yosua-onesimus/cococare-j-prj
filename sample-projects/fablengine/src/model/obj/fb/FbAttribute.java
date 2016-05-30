@@ -22,18 +22,21 @@ public class FbAttribute extends CCEntity {
     @Column(length = 16)
     @CCFieldConfig(group = "General", accessible = Accessible.MANDATORY, unique = true)
     private String name;
+    @Column(length = 255)
+    @CCFieldConfig(group = "General", maxLength = Short.MAX_VALUE)
+    private String description;
     //
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
     private Integer a = -50;
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
     private Integer b = 0;
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
     private Integer c = 50;
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
     private Integer d = 100;
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
     private Integer e = 200;
-    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4)
+    @CCFieldConfig(group = "Power Multiplier", accessible = Accessible.MANDATORY, type = Type.NUMERIC, maxLength = 4, visible = false)
     private Integer f = 400;
 
 //<editor-fold defaultstate="collapsed" desc=" getter-setter ">
@@ -51,6 +54,14 @@ public class FbAttribute extends CCEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getA() {

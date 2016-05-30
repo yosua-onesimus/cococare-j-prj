@@ -1,8 +1,76 @@
 World May End: Wavering Faith
  Lueur Path: Ayva, Pizazz, Jazz, Glace
  Leere Path: Joshua, Peter
- Shaman School: sekolah yang mencari anak yg berbakat menjadi SHaman, untuk memanggil Guardian demi memerangi Diablo
- ada 4 orang yang menunjukkan bakatnya: Joshua, Ayva, Peter, Vince
+ 
+Ethrea, planet yang penuh dengan kehidupan kini menghadapi krisis, Diablo, makhluk yang dapat mengakhiri kehidupan kini terlepas bebas.
+Orang-orang yang tidak menyerah dengan kegelapan mulai mencari seberkas cahaya, mereka membetuk Lueura, organisasi untuk mencari para Shaman, seorang yang dapat memanggil Guardian, sebuah kekuatan yang dapat mengembalikan kedamaian seperti dahulu kala.
+
+Di tengah hutan lebat terjadi aksi kejar-kejaran.
+
+Joshua, Ayva, Peter, dan Vince merupakan Shaman yang terakhir, mereka sedang mengejar Diablo yang akan melarikan diri karena terluka parah.
+
+Suara nafas Diablo makin terdengar berat dan dekat, tampaknya Diablo sudah kelelahan, dan akhirya aksi kejar-kejaran pun terhenti.
+
+Diablo pun mengerang, menunjukkan bahwa ia masih sanggup melakukan perlawanan.
+
+"Menyerahlah Diablo, kau sudah tidak bisa melarikan diri lagi!", kata Vince, seorang Shaman yang memiliki paling mengerti seluk-beluk Diablo.
+
+"Ya, saatnya ketakutan kepadamu berakhir!", sahut Peter, sahabat dekat Vince, dan saudara dari Joshua.
+
+Mendengar dua orang temannya mengkonfrontasi Diablo Joshua hanya terdiam, dia menganalisa gerakan apa yng mungkin dilakukan oleh Diablo.
+
+"Heal!", seru Ayva memulihkan kondisi fisik Joshua, Peter, dan Vince, agar mereka siap untuk kembali melawan Diablo.
+
+Diablo pun kembali mengerang, dan pertarungan pun kembali terjadi.
+
+
+"ВАКТУ КУ СУДАХ ТИБА", kata Diablo menghentikan serangannya, lalu lanjutnya, "КУСЭРАХКАН СЭЛАНЈУТНЮА ПАДА МУ!"
+
+NEW ACTOR
+Name: Joshua Yearnilly
+Weapon: Axiom Blade
+Sphere: Ranger Astral, Fire Matter
+
+Name: Ayva Philia
+Weapon: Peace Staff
+Sphere: Priest Astral, Holy Matter
+
+Name: Peter Yearnilly
+Weapon: Soul Shoter
+Sphere: Hunter Astral, Land Matter
+
+Name: Vince Olbaid
+Weapon: Dark Slayer
+Sphere: Slayer Astral, Dark Matter
+
+
+
+PeaceStaff: kedamaian selalu ada beserta pemakai Staff ini
+WillPlasma: Plasma yang dapat membuat empunya bersikap rela untuk menjalani kondisi yang dialaminya
+CreedSword: Iman akan sesuatu yang akan terjadi
+EquityCane: Cane yang dapat membuat empunya bersikap adil
+SoulShoter: 
+AxiomBlade: Blade yang dapat membuat empunya dapat melihat kebenaran walaupun terpendam dengan sempurna
+
+
+
+
+xx Kebenaran: Truth, verity, axiom
+xx Keadilan: Justice, equity, probity
+xx Kerelaan: Willingness, blessing, grace
+xx Iman:Faith,creed
+xx Damai: peace
+xx Roh:spirit, soul, morale
+
+Lueur Path ~ Part 1
+
+
+
+Leere Path ~ Part 1
+
+
+
+ di awal cerita, 4 orang calon Shaman: Joshua, Ayva, Peter, Vince
  Joshua, Ayva, Peter, dan Vince mengejar Diablo
  Diablo yang terdesak menyerang Vince, dan meledakkan diri
  .......
@@ -10,11 +78,21 @@ World May End: Wavering Faith
  sekelompok Goblin menyerang
  penolong datang.. Jazz dan Pi (peri yang mengeluarkan suara 'pii..')
  
+
  
  
 World May End: Malicious Threat
- Lueur Path: Blaze, Shine, Shade, Rainy
+ Lueur Path: Blaze, Allay, Shade, Rainy
  Leere Path: Hoody (Peter and Pizazz)
+ 3 orang Guardian merencanakan untuk menjadi penguasa dunia, dan mengendalikan semua manusia
+ mereka melakukan menyerang Joshua, Ayva, Jazz, Glace, yang akhirnya tidak diketahui kabarnya
+ sementara itu ada 4 orang remaja yang dipertemukan lewat sebuah turnamen: Blaze, Allay, Shade, Rainy
+ mereka tidak mengetahui asal-usul mereka, nama mereka hanya lah sebuah simbol / nama yang diberikan karena kekuatan mereka
+ Blaze: seorang remaja laki ahli beladiri, dengan suasana hati yang pas, dia bisa melontarkan sebuah bola energi untuk menerang dari jarak jauh
+ Allay: seorang remaja perempuan, yang cukup ketat dalam aturan, dia mampu menyembuhkan luka dengan waktu tertentu
+ Shade: seorang remaja laki ahli beladiri, yang dapat menggerakkan tanggannya dengan cepat sehingga tidak ada seorang pun yang dapat menghindari pukulannya
+ Rainy: seorang remaja perempuan, yang dapat menciptakan salju sampe hujan es jika emosinya sedang kacau
+ 
 World May End: Elusive Thought
  Lueur Path: Jazz
  Leere Path: Joshua
@@ -26,3 +104,4 @@ Inventory
   item
   quantity
   actor
+

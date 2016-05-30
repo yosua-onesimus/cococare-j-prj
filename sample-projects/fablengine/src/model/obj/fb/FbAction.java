@@ -183,38 +183,66 @@ public class FbAction extends CCEntity {
         this.temp = temp;
     }
 
+    protected boolean _hasPrecondition() {
+        return isNullOrEmpty(getEffectPrecondition()) || solved(this, getEffectPrecondition());
+    }
+
+    protected boolean _doesTheActionHit() {
+        return ((getCaster().getHitRate() + getHitRate()) / 2) > new Random().nextInt(100);
+    }
+
+    protected boolean _didTheTargetEvadeTheAction() {
+        return getTarget().getEvaRate() > new Random().nextInt(100);
+    }
+
+    protected void _evaluatePower() {
+        manipulate(this, getEffectPower());
+    }
+
+    protected void _applyAttributeRate() {
+    }
+
+    protected void _applyModifiers() {
+    }
+
+    protected void _applyCrtRate() {
+        if ((((getCaster().getCrtRate() + getCrtRate()) / 2) - getTarget().getEvaRate()) > new Random().nextInt(100)) {
+            power *= 3;
+        }
+    }
+
+    protected void _applyVariance() {
+        power -= getVariance();
+        power += new Random().nextInt(2 * getVariance() + 1);
+    }
+
+    protected void _applyGuard() {
+        if (getTarget().isGuard()) {
+        }
+    }
+
+    protected void _evaluateFormula() {
+        manipulate(this, getEffectFormula());
+    }
+
     public void execute(FbActor caster, FbActor target) {
         setCaster(caster);
         setTarget(target);
-        if (isNullOrEmpty(getEffectPrecondition())
-                || solved(this, getEffectPrecondition())) {
+        if (_hasPrecondition()) {
             caster.setAp(caster.getAp() - getApCost());
-            //does the action hit?
-            //did the target evade the action?
-            if ((((getCaster().getHitRate() + getHitRate()) / 2) > new Random().nextInt(100))
-                    && !(getTarget().getEvaRate() > new Random().nextInt(100))) {
+            if (_doesTheActionHit() && !_didTheTargetEvadeTheAction()) {
                 //then evaluate the damage formula :: step 1
                 if (isNotNullAndNotEmpty(getEffectPower())) {
-                    //apply power formula
-                    manipulate(this, getEffectPower());
-                    //apply element rate
-
-                    //apply modifiers
-
-                    //apply crtRate
-                    if ((((getCaster().getCrtRate() + getCrtRate()) / 2) - getTarget().getEvaRate()) > new Random().nextInt(100)) {
-                        power *= 3;
-                    }
-                    //apply variance
-                    power -= getVariance();
-                    power += new Random().nextInt(2 * getVariance() + 1);
-                    //apply guard
-                    if (getTarget().isGuard()) {
-                    }
+                    _evaluatePower();
+                    _applyAttributeRate();
+                    _applyModifiers();
+                    _applyCrtRate();
+                    _applyVariance();
+                    _applyGuard();
                 }
                 //then evaluate the damage formula :: step 2
                 if (isNotNullAndNotEmpty(getEffectFormula())) {
-                    manipulate(this, getEffectFormula());
+                    _evaluateFormula();
                 }
             }
         }
