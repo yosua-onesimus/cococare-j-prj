@@ -10,6 +10,7 @@ import cococare.common.*;
 import cococare.common.barbecue.CCBarcode;
 import cococare.common.comm.CCComm;
 import cococare.common.ftp.CCFtp;
+import cococare.common.jasperreports.CCJasper;
 import cococare.common.mail.CCMail;
 import cococare.common.mail.CCMail.MailServer;
 import cococare.common.pdf.CCPdf;
@@ -27,6 +28,9 @@ import model.obj.lib.LibBook;
 import model.obj.lib.LibEnum.Gender;
 import model.obj.lib.LibMember;
 import model.obj.lib.LibPublisher;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import net.sourceforge.barbecue.Barcode;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -674,6 +678,19 @@ public class NoX_SimpleAndCleanCode {
 
 //<editor-fold defaultstate="collapsed" desc=" sampleJasper ">
     public static void sampleJasper() {
+        boolean withCococare = false;
+        if (withCococare) {
+            CCJasper jasper = new CCJasper();
+            jasper.newReport("sampleJasper.jasper", null, null);
+            jasper.view();
+        } else {
+            try {
+                JasperPrint jasperPrint = JasperFillManager.fillReport(
+                        CCFile.getFileSystRepoFile("sampleJasper.jasper").getPath(), null);
+                new JasperViewer(jasperPrint, false).setVisible(true);
+            } catch (Exception exception) {
+            }
+        }
     }
 //</editor-fold>
 
@@ -986,6 +1003,6 @@ public class NoX_SimpleAndCleanCode {
 //</editor-fold>
 
     public static void main(String[] args) {
-        sampleHighcharts_sampleSemiCircleDonut();
+        sampleJasper();
     }
 }
