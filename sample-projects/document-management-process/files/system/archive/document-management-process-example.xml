@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+  <UtilUserGroup appl="document-management-process" code="auth" id="1" name="Author" root="false"/>
+  <UtilUserGroup appl="document-management-process" code="revi1" id="2" name="Reviewer1" root="false"/>
+  <UtilUserGroup appl="document-management-process" code="revi2" id="3" name="Reviewer2" root="false"/>
+  <UtilUserGroup appl="document-management-process" code="appr" id="4" name="Approver" root="false"/>
+  <UtilUser active="true" appl="document-management-process" fullname="AuthorA" id="1" password="21232f297a57a5a743894a0e4a801fc3" userGroup="1" username="autha"/>
+  <UtilUser active="true" appl="document-management-process" fullname="AuthorB" id="2" password="21232f297a57a5a743894a0e4a801fc3" userGroup="1" username="authb"/>
+  <UtilUser active="true" appl="document-management-process" fullname="Reviewer1A" id="3" password="21232f297a57a5a743894a0e4a801fc3" userGroup="2" username="revi1a"/>
+  <UtilUser active="true" appl="document-management-process" fullname="Reviewer1B" id="4" password="21232f297a57a5a743894a0e4a801fc3" userGroup="2" username="revi1b"/>
+  <UtilUser active="true" appl="document-management-process" fullname="Reviewer2A" id="5" password="21232f297a57a5a743894a0e4a801fc3" userGroup="3" username="revi2a"/>
+  <UtilUser active="true" appl="document-management-process" fullname="Reviewer2B" id="6" password="21232f297a57a5a743894a0e4a801fc3" userGroup="3" username="revi2b"/>
+  <UtilUser active="true" appl="document-management-process" fullname="ApproverA" id="7" password="21232f297a57a5a743894a0e4a801fc3" userGroup="4" username="appra"/>
+  <UtilUser active="true" appl="document-management-process" fullname="ApproverB" id="8" password="21232f297a57a5a743894a0e4a801fc3" userGroup="4" username="apprb"/>
+  <WfScript code="S001" id="1" name="ReviewerDecision" path="model.obj.dmp.DmpScript$ReviewerDecision" type="ADDITIONAL_INPUT" typeIndex="0"/>
+  <WfScript code="S002" id="2" name="SubmitToReviewerParallel" path="model.obj.dmp.DmpScript$SubmitToReviewerParallel" type="ADDITIONAL_INPUT" typeIndex="0"/>
+  <WfScript code="S003" id="3" name="visibleOnSerial" path="model.obj.dmp.DmpScript:visibleOnSerial" type="ACTION_VISIBILITY" typeIndex="1"/>
+  <WfScript code="S004" id="4" name="visibleOnParallel" path="model.obj.dmp.DmpScript:visibleOnParallel" type="ACTION_VISIBILITY" typeIndex="1"/>
+  <WfScript code="S005" id="5" name="atLeastOneReviewerSelected" path="model.obj.dmp.DmpScript:atLeastOneReviewerSelected" type="ROUTE_VALIDATION" typeIndex="2"/>
+  <WfScript code="S006" id="6" name="isSubmitToReviewer1" path="model.obj.dmp.DmpScript:isSubmitToReviewer1" type="ROUTE_AVAILABILITY" typeIndex="3"/>
+  <WfScript code="S007" id="7" name="isSubmitToReviewer2" path="model.obj.dmp.DmpScript:isSubmitToReviewer2" type="ROUTE_AVAILABILITY" typeIndex="3"/>
+  <WfScript code="S008" id="8" name="updateDocumentNumber" path="model.obj.dmp.DmpScript:updateDocumentNumber" type="POST_ROUTE_PROCESS" typeIndex="4"/>
+  <WfScript code="S009" id="9" name="updateParallelProcessToFalse" path="model.obj.dmp.DmpScript:updateParallelProcessToFalse" type="POST_ROUTE_PROCESS" typeIndex="4"/>
+  <WfScript code="S010" id="10" name="updateParallelProcessToTrue" path="model.obj.dmp.DmpScript:updateParallelProcessToTrue" type="POST_ROUTE_PROCESS" typeIndex="4"/>
+  <WfProcess code="DocMngm" firstProcess="true" id="1" name="Document Management" postRouteProcess="8"/>
+  <WfActivity code="Act01" dayLimit="5" id="1" name="Appl Created" pointType="Start Point" pointTypeIndex="0" process="1" userRole="1" weight="1"/>
+  <WfActivity code="Act02" dayLimit="5" id="2" name="Appl Pending Reviewer 1" pointType="Plain Point" pointTypeIndex="1" process="1" userRole="2" weight="1"/>
+  <WfActivity code="Act03" dayLimit="5" id="3" name="Appl Pending Reviewer 2" pointType="Plain Point" pointTypeIndex="1" process="1" userRole="3" weight="1"/>
+  <WfActivity code="Act04" dayLimit="5" id="4" name="Appl Pending Approver" pointType="Merge Point" pointTypeIndex="2" process="1" userRole="4" weight="1"/>
+  <WfActivity code="Act05" dayLimit="5" id="5" name="Appl Approved" pointType="Final Point" pointTypeIndex="3" process="1" weight="1"/>
+  <WfAction activity="1" code="Act01" id="1" mergeable="false" name="Submit to Reviewer 1"/>
+  <WfAction activity="1" additionalInput="2" code="Act02" id="2" mergeable="true" name="Submit to Reviewer (Parallel)" routeValidation="5"/>
+  <WfAction actionVisibility="3" activity="2" code="Act03" id="3" mergeable="false" name="Return to Author"/>
+  <WfAction actionVisibility="3" activity="2" code="Act04" id="4" mergeable="false" name="Submit to Reviewer 2"/>
+  <WfAction actionVisibility="4" activity="2" code="Act05" id="5" mergeable="false" name="Submit to Approver "/>
+  <WfAction actionVisibility="3" activity="3" code="Act06" id="6" mergeable="false" name="Return to Reviewer 1"/>
+  <WfAction activity="3" code="Act07" id="7" mergeable="false" name="Submit to Approver "/>
+  <WfAction actionVisibility="3" activity="4" code="Act08" id="8" mergeable="false" name="Return to Reviewer 2"/>
+  <WfAction activity="4" code="Act09" id="9" mergeable="false" name="Decline"/>
+  <WfAction activity="4" code="Act10" id="10" mergeable="false" name="Approve"/>
+  <WfTransition action="1" code="Trans01" destination="2" id="1" name="to Reviewer 1" postRouteProcess="9" routeType="Manual" routeTypeIndex="0" sequence="0"/>
+  <WfTransition action="2" code="Trans02" destination="2" id="2" name="to Reviewer 1" postRouteProcess="10" routeAvailability="6" routeType="Weightage" routeTypeIndex="3" sequence="0"/>
+  <WfTransition action="2" code="Trans03" destination="3" id="3" name="to Reviewer 2" routeAvailability="7" routeType="Weightage" routeTypeIndex="3" sequence="1"/>
+  <WfTransition action="3" code="Trans04" destination="1" id="4" name="to Author" routeType="To Last User" routeTypeIndex="5" sequence="0"/>
+  <WfTransition action="4" code="Trans05" destination="3" id="5" name="to Reviewer 2" routeType="Manual" routeTypeIndex="0" sequence="0"/>
+  <WfTransition action="5" code="Trans06" destination="4" id="6" name="to Approver" routeType="Manual" routeTypeIndex="0" sequence="0"/>
+  <WfTransition action="6" code="Trans07" destination="2" id="7" name="to Reviewer 1" routeType="To Last User" routeTypeIndex="5" sequence="0"/>
+  <WfTransition action="7" code="Trans08" destination="4" id="8" name="to Approver " routeType="Manual" routeTypeIndex="0" sequence="0"/>
+  <WfTransition action="8" code="Trans09" destination="3" id="9" name="to Reviewer 2" routeType="To Last User" routeTypeIndex="5" sequence="0"/>
+  <WfTransition action="9" code="Trans10" destination="1" id="10" name="to Author" routeType="To Last User" routeTypeIndex="5" sequence="0"/>
+  <WfTransition action="10" code="Trans11" destination="5" id="11" name="to System" routeType="Pooling" routeTypeIndex="1" sequence="0"/>
+</root>

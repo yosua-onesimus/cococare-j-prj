@@ -4,8 +4,8 @@ package console;
 import cococare.common.CCConfig;
 import cococare.database.CCEntityBo;
 import cococare.database.CCHibernate;
+import cococare.datafile.CCDom;
 import cococare.datafile.CCFile;
-import cococare.datafile.jxl.CCExcel;
 import cococare.framework.common.CFApplCtrl;
 import cococare.framework.model.mdl.util.UtilityModule;
 import cococare.framework.model.mdl.wf.WorkflowModule;
@@ -13,8 +13,8 @@ import cococare.framework.model.obj.util.UtilUser;
 import cococare.framework.model.obj.util.UtilUserGroup;
 import cococare.framework.model.obj.wf.*;
 import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 //</editor-fold>
 
 public class TestFunction {
@@ -37,57 +37,30 @@ public class TestFunction {
 
 //<editor-fold defaultstate="collapsed" desc=" _exim() ">
     private static void _exim() {
-        File excelFile = CCFile.getFileSystArchFile("document-management-process-example.xls");
-        CCExcel excel = new CCExcel();
+        File xmlFile = CCFile.getFileSystArchFile("document-management-process-example.xml");
         if (false) {
             //export
-            excel.newWorkbook();
+            List list = new ArrayList();
             for (Class eximClass : eximClasses) {
-                excel.newSheet(eximClass.getSimpleName());
-                excel.initEntity(eximClass, false);
-                excel.writeRowEntityHeader();
-                excel.writeRowEntity(CCEntityBo.INSTANCE.getListBy(eximClass, "", "", "", 0, null));
+                list.addAll(CCEntityBo.INSTANCE.getListBy(eximClass, "", "", "", 0, null));
             }
-            excel.saveAndCloseWorkbook(excelFile);
+            CCDom dom = new CCDom();
+            dom.writeEntity("root", list);
+            dom.transform(xmlFile);
         }
         if (true) {
             //import  -->  init initial data example
-            excel.openWorkbook(excelFile);
+            CCDom dom = new CCDom();
+            dom.read(xmlFile);
             for (Class eximClass : eximClasses) {
-                excel.getSheet(eximClass.getSimpleName());
-                excel.initEntity(eximClass, false);
-                hibernate.restore(excel.readRowEntity(1, excel.getRowCount() - 1));
+                hibernate.restore(dom.readEntity(eximClass));
             }
-            excel.closeWorkbook();
         }
     }
 //</editor-fold>
 
     public static void main(String[] args) {
         _initHibernate();
-        //_exim();
-        UtilUserGroup userGroup1 = hibernate.get(UtilUserGroup.class, 1L);
-        UtilUserGroup userGroup2 = hibernate.get(UtilUserGroup.class, 2L);
-        UtilUser user1 = hibernate.get(UtilUser.class, 1L);
-        UtilUser user1b = hibernate.get(UtilUser.class, 1L);
-        UtilUser user1c = new UtilUser();
-        user1c.setId(1L);
-        UtilUser user2 = hibernate.get(UtilUser.class, 2L);
-
-//        System.out.println(userGroup1.equals(userGroup2));
-//        System.out.println(userGroup1.equals(user1));
-//        System.out.println(userGroup2.equals(user2));
-//        System.out.println(user1.equals(user2));
-//        System.out.println(user1.equals(user1b));
-//        System.out.println(user1.equals(user1c));
-
-        Set<UtilUser> users = new HashSet<UtilUser>();
-        users.add(user1);
-        users.add(user1b);
-        users.add(user1c);
-        users.add(user2);
-        for (UtilUser u : users) {
-            System.out.println(u.getUsername());
-        }
+        _exim();
     }
 }

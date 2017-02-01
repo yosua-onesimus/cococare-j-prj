@@ -1,8 +1,9 @@
 package model.mdl.dmp;
 
 //<editor-fold defaultstate="collapsed" desc=" import ">
-import cococare.database.CCHibernate;
 import cococare.database.CCHibernateModule;
+import java.util.Arrays;
+import java.util.List;
 import model.obj.dmp.DmpDocument;
 import model.obj.dmp.DmpDocumentReference;
 import model.obj.dmp.DmpDocumentTag;
@@ -20,13 +21,12 @@ public class DmpModule extends CCHibernateModule {
 
 //<editor-fold defaultstate="collapsed" desc=" public method ">
     @Override
-    public void init(CCHibernate hibernate) {
-        super.init(hibernate);
-        //
-        hibernate.addAnnotatedClass(DmpTag.class);
-        hibernate.addAnnotatedClass(DmpDocument.class);
-        hibernate.addAnnotatedClass(DmpDocumentTag.class);
-        hibernate.addAnnotatedClass(DmpDocumentReference.class);
+    protected List<Class> _getAnnotatedClasses() {
+        return (List) Arrays.asList(
+                DmpTag.class,
+                DmpDocument.class,
+                DmpDocumentTag.class,
+                DmpDocumentReference.class);
     }
 //</editor-fold>
 }

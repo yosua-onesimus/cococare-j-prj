@@ -3,7 +3,8 @@ package controller.form.dmp;
 //<editor-fold defaultstate="collapsed" desc=" import ">
 import cococare.common.CCCustomField;
 import static cococare.common.CCLogic.isNotNull;
-import static cococare.database.CCHibernate.readTransientByteAValue;
+import cococare.database.CCEntityBo;
+import static cococare.database.CCEntityBo.INSTANCE;
 import static cococare.datafile.CCFile.*;
 import cococare.framework.swing.controller.form.PnlDefaultListCtrl;
 import static cococare.swing.CCSwing.addListener;
@@ -24,7 +25,7 @@ public class PnlDocumentReferenceListCtrl extends PnlDefaultListCtrl {
 
     @Override
     protected Class _getClass() {
-        return _getClassBySwingView();
+        return _getDefaultToCustomClass();
     }
 
     @Override
@@ -51,7 +52,7 @@ public class PnlDocumentReferenceListCtrl extends PnlDefaultListCtrl {
                         @Override
                         public void actionPerformed(ActionEvent actionEvent) {
                             tblEntity.getStopCellEditingListener().actionPerformed(actionEvent);
-                            readTransientByteAValue(documentReference);
+                            CCEntityBo.INSTANCE.readTransientByteAValue(documentReference);
                             File file = showSaveDialog(new File(documentReference.getValue()));
                             if (isNotNull(file) && writeByteA(documentReference.getByteA(), file)) {
                                 open(file);
